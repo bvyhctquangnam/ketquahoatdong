@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Dashboard | Báo cáo 12 tháng</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">    
+    <link rel="stylesheet" href="style.css">    
+</head>
+<body>
+
+<div class="dashboard">
+    <div class="header">
+        <div class="title-section">
+            <h1><i class="fas fa-yin-yang"></i> Bệnh viện YHCT Quảng Nam</h1>
+            <p><i class="fas fa-chart-line"></i> <a href="https://docs.google.com/spreadsheets/d/1EFUf22zfRlEXXDQSOK6MgsGZPimzW93yfcTdAMs158Y/edit?gid=2070867645#gid=2070867645" target="_blank" style="color: #7a9aa8; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#facc15'" onmouseout="this.style.color='#7a9aa8'">Báo cáo kết quả hoạt động | 12 tháng</a></p>
+        </div>
+        <div class="filter-bar">
+            <div class="filter-group">
+                <label><i class="fas fa-calendar"></i> Năm:</label>
+                <select id="yearSelect">
+                    <option value="2026" selected>2026</option>
+                    <option value="2025">2025</option>
+                    <option value="2024">2024</option>
+                    <option value="2023">2023</option>
+                    <option value="2022">2022</option>
+                    <option value="2021">2021</option>
+                </select>
+            </div>
+            <div class="compare-badge">
+                <i class="fas fa-chart-simple"></i> So sánh: <span id="compareYearLabel">2024</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5 KPI chính -->
+    <div class="kpi-grid" id="kpiGrid"></div>
+
+    <!-- Biểu đồ -->
+    <div class="chart-section">
+        <div class="chart-header">
+            <h3><i class="fas fa-chart-line"></i> Xu hướng theo tháng</h3>
+            <div class="chart-tabs" id="chartTabs">
+                <div class="chart-tab active" data-metric="kham">Khám bệnh</div>
+                <div class="chart-tab" data-metric="noitru">Nội trú</div>
+                <div class="chart-tab" data-metric="ngaydt">Ngày điều trị</div>
+                <div class="chart-tab" data-metric="congsuat">Công suất KH</div>
+            </div>
+        </div>
+        <canvas id="trendChart"></canvas>
+    </div>
+
+    <!-- Bảng dữ liệu -->
+    <div class="table-section">
+        <div class="table-header">
+            <h3><i class="fas fa-table"></i> Chi tiết 12 tháng</h3>
+            <span style="font-size: 0.65rem;"><i class="fas fa-info-circle"></i> Đơn vị: lượt (trừ ngày ĐT, công suất %)</span>
+        </div>
+        <div style="overflow-x: auto;">
+            <table class="data-table" id="dataTable">
+                <thead id="tableHeader"></thead>
+                <tbody id="tableBody"></tbody>
+            </table>
+        </div>
+    </div>
+    <div class="footer-note">
+        <i class="fas fa-database"></i> Dữ liệu nội bộ | Cập nhật 2026
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="./scripts.js"></script>
+</body>
+</html>

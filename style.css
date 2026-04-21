@@ -1,0 +1,205 @@
+* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a0f1a;
+            font-family: 'Inter', sans-serif;
+            padding: 10px 16px;
+            color: #eef5ff;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        /* Dashboard chiếm full width */
+        .dashboard {
+            width: 100%;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        /* Header - gọn */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+            gap: 10px;
+            background: linear-gradient(135deg, #0f1820, #0a121a);
+            padding: 5px 20px;
+            border-radius: 30px;
+            border: 1px solid #2a3a4a;
+        }
+        .title-section h1 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #60e0c0, #3080c0);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .title-section p { font-size: 1rem; color: #7a9aa8; margin-top: 2px; }
+
+        /* Filter bar */
+        .filter-bar {
+            background: #0e1620;
+            border-radius: 30px;
+            padding: 6px 20px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+            border: 1px solid #2a3a4a;
+        }
+        .filter-group label { font-size: 0.75rem; color: #7a9aa8; }
+        .filter-group select {
+            background: #0a0f1a;
+            border: 1px solid #2a5a5a;
+            color: #eef5ff;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            cursor: pointer;
+        }
+        .compare-badge {
+            background: #1a3a3a;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            color: #50e0c0;
+        }
+
+        /* KPI Cards - 5 cột đều nhau trên desktop */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .kpi-card {
+            background: linear-gradient(145deg, #0f1820, #0a121a);
+            border-radius: 18px;
+            padding: 10px 14px;
+            border-left: 3px solid;
+            transition: all 0.2s;
+        }
+        .kpi-card:nth-child(1) { border-left-color: #2dd4bf; }
+        .kpi-card:nth-child(2) { border-left-color: #facc15; }
+        .kpi-card:nth-child(3) { border-left-color: #a78bfa; }
+        .kpi-card:nth-child(4) { border-left-color: #fb7185; }
+        .kpi-card:nth-child(5) { border-left-color: #34d399; }
+
+        .kpi-title {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: #8aabba;
+            margin-bottom: 6px;
+        }
+        .kpi-value {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: white;
+            line-height: 1.2;
+        }
+        .kpi-compare {
+            font-size: 0.6rem;
+            margin-top: 6px;
+            padding-top: 5px;
+            border-top: 1px solid #2a3a4a;
+        }
+        .trend-up { color: #2dd4bf; }
+        .trend-down { color: #fb7185; }
+
+        /* Chart section - cân đối */
+        .chart-section {
+            background: #0e1620;
+            border-radius: 20px;
+            padding: 12px 18px;
+            margin-bottom: 16px;
+            border: 1px solid #2a3a4a;
+        }
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #2a3a4a;
+        }
+        .chart-header h3 { font-size: 0.85rem; font-weight: 600; color: #c0e0e0; }
+        .chart-tabs { display: flex; gap: 8px; }
+        .chart-tab {
+            background: #0a121a;
+            border: 1px solid #2a5a5a;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .chart-tab.active { background: #2a6a6a; border-color: #50e0c0; color: white; }
+        .chart-tab:hover { background: #1a4a4a; }
+        canvas { max-height: 220px !important; width: 100%; }
+
+        /* Table section - font vừa phải */
+        .table-section {
+            background: #0e1620;
+            border-radius: 20px;
+            padding: 12px 18px;
+            border: 1px solid #2a3a4a;
+        }
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #2a3a4a;
+        }
+        .table-header h3 { font-size: 0.85rem; font-weight: 600; }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.7rem;
+        }
+        .data-table th {
+            text-align: center;
+            padding: 8px 4px;
+            background: #0a1a1a;
+            color: #aaccc0;
+            font-weight: 600;
+        }
+        .data-table td {
+            text-align: center;
+            padding: 6px 4px;
+            border-bottom: 1px solid #1a3a3a;
+        }
+        .data-table tr:hover { background: #0a1a1a; }
+        .year-col { background: #1a3a3a; font-weight: 700; color: #50e0c0; }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 0.75rem;
+            color: #5a8a7a;
+            padding-top: 5px;
+            border-top: 1px solid #2a3a4a;
+        }
+
+        /* Responsive: trên mobile vẫn ok */
+        @media (max-width: 1000px) {
+            body { padding: 8px 12px; }
+            .kpi-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+            .kpi-value { font-size: 1.2rem; }
+            .data-table { font-size: 0.6rem; }
+            canvas { max-height: 180px; }
+        }
+
+        @media (max-width: 700px) {
+            .kpi-grid { grid-template-columns: 1fr; }
+            .chart-tabs { flex-wrap: wrap; }
+        }
