@@ -59,6 +59,19 @@ function sumIgnoreNull(arr) {
     return arr.filter(v => v !== null).reduce((a, b) => a + b, 0);
 }
 
+function sumFirstNNotNull(arr, n) {
+    if (!arr) return 0;
+    let count = 0;
+    let sum = 0;
+    for (let i = 0; i < arr.length && count < n; i++) {
+        if (arr[i] !== null) {
+            sum += arr[i];
+            count++;
+        }
+    }
+    return sum;
+}
+
 function countValid(arr) {
     return arr ? arr.filter(v => v !== null).length : 0;
 }
@@ -69,6 +82,116 @@ function formatValue(value, metric, isKh = false) {
     if (metric === 'ngaytb') return value.toFixed(1);
     if (isKh && metric === 'kham') return value.toLocaleString('vi-VN');
     return value.toLocaleString('vi-VN');
+}
+
+// Lấy số tháng có dữ liệu của năm
+function getSoThangCoDuLieu(nam, metricKey) {
+    const data = monthlyData[metricKey]?.[nam];
+    if (!data) return 0;
+    return data.filter(v => v !== null).length;
+}
+
+// Tính tổng cho năm so sánh (cùng kỳ nếu năm hiện tại chưa đủ)
+function tinhTongSoSanh(namHienTai, namSoSanh, metricKey) {
+    const dataHienTai = monthlyData[metricKey]?.[namHienTai];
+    const dataSoSanh = monthlyData[metricKey]?.[namSoSanh];
+    
+    if (!dataHienTai || !dataSoSanh) return 0;
+    
+    const soThangHienTai = countValid(dataHienTai);
+    const soThangSoSanh = countValid(dataSoSanh);
+    
+    // Nếu năm hiện tại chưa đủ 12 tháng, chỉ lấy số tháng tương ứng từ năm so sánh
+    if (soThangHienTai < 12 && soThangHienTai > 0) {
+        let count = 0;
+        let sum = 0;
+        for (let i = 0; i < dataSoSanh.length && count < soThangHienTai; i++) {
+            if (dataSoSanh[i] !== null) {
+                sum += dataSoSanh[i];
+                count++;
+            }
+        }
+        return sum;
+    }
+    
+    // Năm hiện tại đã đủ dữ liệu, lấy tổng cả năm so sánh
+    return sumIgnoreNull(dataSoSanh);
+}
+
+// Tính trung bình cho năm so sánh (cùng kỳ)
+function tinhTrungBinhSoSanh(namHienTai, namSoSanh, metricKey, isAvg = false) {
+    if (metricKey === 'congsuat') {
+        // Công suất cần tính theo công thức đặc biệt
+        const ngaydtHienTai = monthlyData.ngaydt[namHienTai];
+        const ngaydtSoSanh = monthlyData.ngaydt[namSoSanh];
+        if (!ngaydtHienTai || !ngaydtSoSanh) return 0;
+        
+        const soThangHienTai = countValid(ngaydtHienTai);
+        const soGiuong = soGiuongKH[namSoSanh];
+        
+        if (soThangHienTai < 12 && soThangHienTai > 0) {
+            // Tính tổng ngày điều trị và tổng số ngày của các tháng tương ứng
+            let tongNgaydt = 0;
+            let tongNgayTrongThang = 0;
+            let count = 0;
+            
+            for (let i = 0; i < ngaydtSoSanh.length && count < soThangHienTai; i++) {
+                if (ngaydtSoSanh[i] !== null) {
+                    tongNgaydt += ngaydtSoSanh[i];
+                    let ngayTrongThang = soNgayTrongThang[i];
+                    if (i === 1 && isNamNhuan(namSoSanh)) ngayTrongThang = 29;
+                    tongNgayTrongThang += ngayTrongThang;
+                    count++;
+                }
+            }
+            
+            if (tongNgayTrongThang === 0 || soGiuong === 0) return 0;
+            return (tongNgaydt / (soGiuong * tongNgayTrongThang)) * 100;
+        } else {
+            // Đủ 12 tháng, dùng công thức năm
+            const tongNgaydt = sumIgnoreNull(ngaydtSoSanh);
+            return (tongNgaydt / (soGiuong * 365)) * 100;
+        }
+    }
+    
+    if (metricKey === 'ngaytb') {
+        const ngaydtHienTai = monthlyData.ngaydt[namHienTai];
+        const noitruHienTai = monthlyData.noitru[namHienTai];
+        const ngaydtSoSanh = monthlyData.ngaydt[namSoSanh];
+        const noitruSoSanh = monthlyData.noitru[namSoSanh];
+        
+        if (!ngaydtHienTai || !noitruHienTai || !ngaydtSoSanh || !noitruSoSanh) return 0;
+        
+        const soThangHienTai = countValid(ngaydtHienTai);
+        
+        if (soThangHienTai < 12 && soThangHienTai > 0) {
+            let tongNgaydt = 0;
+            let tongNoitru = 0;
+            let count = 0;
+            
+            for (let i = 0; i < ngaydtSoSanh.length && count < soThangHienTai; i++) {
+                if (ngaydtSoSanh[i] !== null && noitruSoSanh[i] !== null) {
+                    tongNgaydt += ngaydtSoSanh[i];
+                    tongNoitru += noitruSoSanh[i];
+                    count++;
+                }
+            }
+            return tongNoitru > 0 ? tongNgaydt / tongNoitru : 0;
+        } else {
+            let tongNgaydt = 0;
+            let tongNoitru = 0;
+            for (let i = 0; i < 12; i++) {
+                if (ngaydtSoSanh[i] !== null && noitruSoSanh[i] !== null) {
+                    tongNgaydt += ngaydtSoSanh[i];
+                    tongNoitru += noitruSoSanh[i];
+                }
+            }
+            return tongNoitru > 0 ? tongNgaydt / tongNoitru : 0;
+        }
+    }
+    
+    // Các chỉ tiêu khác (kham, noitru, ngaydt)
+    return tinhTongSoSanh(namHienTai, namSoSanh, metricKey);
 }
 
 // ==================== TÍNH NGÀY ĐT TRUNG BÌNH ====================
@@ -106,7 +229,6 @@ function getNgayDTTrungBinhTheoThang(nam) {
 }
 
 // ==================== TÍNH CÔNG SUẤT GIƯỜNG ====================
-// Công thức tháng: Ngày điều trị tháng / (Số giường × Số ngày trong tháng) × 100%
 function tinhCongSuatThang(nam, thang) {
     const ngaydt = monthlyData.ngaydt[nam]?.[thang];
     if (ngaydt === null) return null;
@@ -118,7 +240,6 @@ function tinhCongSuatThang(nam, thang) {
     return (ngaydt / (soGiuong * ngayTrongThang)) * 100;
 }
 
-// Tính công suất trung bình cho các tháng đã có dữ liệu
 function tinhCongSuatTrungBinhNam(nam) {
     const ngaydt = monthlyData.ngaydt[nam];
     if (!ngaydt) return 0;
@@ -139,12 +260,10 @@ function tinhCongSuatTrungBinhNam(nam) {
     
     if (tongNgayTrongThang === 0 || soGiuong === 0) return 0;
     
-    // Nếu đã có đủ 12 tháng, dùng mẫu số 365 (cố định theo quy chuẩn y tế)
     if (soThangCoDuLieu === 12) {
         return (tongNgaydt / (soGiuong * 365)) * 100;
     }
     
-    // Chưa đủ 12 tháng, dùng tổng số ngày thực tế của các tháng đó
     return (tongNgaydt / (soGiuong * tongNgayTrongThang)) * 100;
 }
 
@@ -192,12 +311,12 @@ function updateDashboard() {
     const tbNgaydt = tinhNgayDTTrungBinhNam(year);
     const tbCongsuat = tinhCongSuatTrungBinhNam(year);
     
-    // ===== TÍNH TOÁN NĂM SO SÁNH =====
-    const tongKhamPrev = sumIgnoreNull(monthlyData.kham[prevYear]);
-    const tongNoitruPrev = sumIgnoreNull(monthlyData.noitru[prevYear]);
-    const tongNgaydtPrev = sumIgnoreNull(monthlyData.ngaydt[prevYear]);
-    const tbNgaydtPrev = tinhNgayDTTrungBinhNam(prevYear);
-    const tbCongsuatPrev = tinhCongSuatTrungBinhNam(prevYear);
+    // ===== TÍNH TOÁN NĂM SO SÁNH (CÙNG KỲ NẾU CẦN) =====
+    const tongKhamPrev = tinhTongSoSanh(year, prevYear, 'kham');
+    const tongNoitruPrev = tinhTongSoSanh(year, prevYear, 'noitru');
+    const tongNgaydtPrev = tinhTongSoSanh(year, prevYear, 'ngaydt');
+    const tbNgaydtPrev = tinhTrungBinhSoSanh(year, prevYear, 'ngaytb');
+    const tbCongsuatPrev = tinhTrungBinhSoSanh(year, prevYear, 'congsuat');
     
     // ===== KẾ HOẠCH VÀ % HOÀN THÀNH =====
     const kh = {
@@ -232,6 +351,10 @@ function updateDashboard() {
         const khFormatted = formatValue(k.kh, k.type, true);
         const htColor = getColorByPercent(k.ht);
         
+        // Thêm text "cùng kỳ" nếu năm hiện tại chưa đủ dữ liệu
+        const soThangHienTai = getSoThangCoDuLieu(year, k.type);
+        const kyText = (soThangHienTai < 12 && soThangHienTai > 0) ? ` (cùng kỳ ${soThangHienTai} tháng)` : '';
+        
         return `
             <div class="kpi-card">
                 <div class="kpi-title">${k.title}</div>
@@ -239,7 +362,7 @@ function updateDashboard() {
                 <div class="kpi-compare">
                     <div>KH ${year}: ${khFormatted} ${k.unit}</div>
                     <div>So với KH: <span style="color:${htColor}; font-weight:bold;">${k.ht.toFixed(1)}%</span></div>
-                    <div>${prevYear}: ${formatValue(k.prev, k.type)}
+                    <div>${prevYear}${kyText}: ${formatValue(k.prev, k.type)}
                     <span class="${change.colorClass}"> ${change.icon} ${change.percent}%</span></div>
                 </div>
             </div>
@@ -252,7 +375,6 @@ function updateDashboard() {
     
     tableHeader.innerHTML = `<tr><th>Chỉ tiêu</th>${monthsShort.map(m => `<th>${m}</th>`).join('')}<th>Tổng/TB</th><th>KH năm</th><th>% HT</th></tr>`;
     
-    // Thông tin số giường phía trên bảng
     let bedInfo = document.getElementById('bedInfo');
     if (!bedInfo) {
         bedInfo = document.createElement('div');
@@ -263,7 +385,6 @@ function updateDashboard() {
     }
     bedInfo.innerHTML = `<i class="fas fa-bed"></i> Số giường KH: ${soGiuongKH[year]} giường | KH công suất: ${kh.congsuat}% | KH ngày ĐT TB: ${kh.ngaytb} ngày`;
     
-    // Định nghĩa các chỉ tiêu trong bảng
     const metrics = [
         { 
             key: 'kham', 
@@ -340,25 +461,27 @@ function updateDashboard() {
         </tr>`;
     });
     
-    // Dòng so sánh năm trước (theo tab đang chọn)
+    // Dòng so sánh năm trước (theo tab đang chọn) - CŨNG CÙNG KỲ
     const compareNames = { kham: 'Khám bệnh', noitru: 'Nội trú', ngaydt: 'Ngày điều trị', ngaytb: 'Ngày ĐT TB', congsuat: 'Công suất' };
     let compareData, compareTotal;
     
     if (currentMetric === 'congsuat') {
         compareData = getCongSuatTheoThang(prevYear);
-        compareTotal = tinhCongSuatTrungBinhNam(prevYear);
+        compareTotal = tinhTrungBinhSoSanh(year, prevYear, 'congsuat');
     } else if (currentMetric === 'ngaytb') {
         compareData = getNgayDTTrungBinhTheoThang(prevYear);
-        compareTotal = tinhNgayDTTrungBinhNam(prevYear);
+        compareTotal = tinhTrungBinhSoSanh(year, prevYear, 'ngaytb');
     } else {
         compareData = monthlyData[currentMetric][prevYear];
-        compareTotal = sumIgnoreNull(compareData);
+        compareTotal = tinhTongSoSanh(year, prevYear, currentMetric);
     }
     
     const compareDisplay = formatValue(compareTotal, currentMetric);
+    const soThangHienTai = getSoThangCoDuLieu(year, currentMetric);
+    const kyTextTable = (soThangHienTai < 12 && soThangHienTai > 0) ? ` (cùng kỳ ${soThangHienTai} tháng)` : '';
     
     rows += `<tr style="background:#0a1a1a; border-top:2px solid #2a6a6a;">
-        <td style="text-align:left; font-weight:700; color:#50e0c0;">${prevYear} (So sánh ${compareNames[currentMetric]})</td>
+        <td style="text-align:left; font-weight:700; color:#50e0c0;">${prevYear}${kyTextTable} (So sánh ${compareNames[currentMetric]})</td>
         ${monthsShort.map((_, idx) => {
             let val = compareData ? compareData[idx] : null;
             if (val === null) return `<td style="color:#5a7a7a;">—</td>`;
@@ -370,7 +493,7 @@ function updateDashboard() {
         <td class="year-col">${compareDisplay}</td>
         <td class="year-col">—</td>
         <td class="year-col">—</td>
-    </tr>`;
+    </table>`;
     
     tableBody.innerHTML = rows;
     updateChart();
@@ -423,7 +546,6 @@ function updateChart() {
         }
     ];
     
-    // Chỉ thêm đường kế hoạch cho tab Công suất
     if (currentMetric === 'congsuat') {
         const khValue = keHoachNam.congsuat?.[currentYear];
         if (khValue !== undefined && khValue !== null) {
