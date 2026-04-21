@@ -5,7 +5,7 @@ const monthlyData = {
         2022: [115, 203, 406, 435, 659, 749, 670, 642, 551, 564, 677, 489],
         2023: [199, 577, 714, 462, 604, 427, 251, 137, 144, 144, 96, 72],
         2024: [53, 83, 118, 80, 114, 108, 105, 123, 286, 344, 391, 373],
-        2025: [152, 321, 338, 324, 379, 403, 428, 361, 386, 295, 331, 307],
+        2025: [152, 321, 388, 324, 379, 403, 428, 361, 386, 295, 331, 307],
         2026: [268, 110, 416, null, null, null, null, null, null, null, null, null]
     },
     noitru: {
@@ -218,11 +218,11 @@ function updateDashboard() {
     
     // ==================== KPI CARDS ====================
     const kpis = [
-        { title: 'Tổng lượt khám', curr: tongKham, prev: tongKhamPrev, kh: kh.kham, ht: ht.kham, unit: 'lượt', type: 'kham' },
-        { title: 'Tổng lượt nội trú', curr: tongNoitru, prev: tongNoitruPrev, kh: kh.noitru, ht: ht.noitru, unit: 'lượt', type: 'noitru' },
-        { title: 'Tổng ngày điều trị', curr: tongNgaydt, prev: tongNgaydtPrev, kh: kh.ngaydt, ht: ht.ngaydt, unit: 'ngày', type: 'ngaydt' },
-        { title: 'Ngày ĐT trung bình', curr: tbNgaydt, prev: tbNgaydtPrev, kh: kh.ngaytb, ht: ht.ngaytb, unit: 'ngày', type: 'ngaytb' },
-        { title: 'Công suất thực tế', curr: tbCongsuat, prev: tbCongsuatPrev, kh: kh.congsuat, ht: ht.congsuat, unit: '%', type: 'congsuat' }
+        { title: 'Tổng số lượt khám bệnh', curr: tongKham, prev: tongKhamPrev, kh: kh.kham, ht: ht.kham, unit: 'lượt', type: 'kham' },
+        { title: 'Tổng số lượt nội trú', curr: tongNoitru, prev: tongNoitruPrev, kh: kh.noitru, ht: ht.noitru, unit: 'lượt', type: 'noitru' },
+        { title: 'Tổng số ngày điều trị', curr: tongNgaydt, prev: tongNgaydtPrev, kh: kh.ngaydt, ht: ht.ngaydt, unit: 'ngày', type: 'ngaydt' },
+        { title: 'Ngày điều trị trung bình', curr: tbNgaydt, prev: tbNgaydtPrev, kh: kh.ngaytb, ht: ht.ngaytb, unit: 'ngày', type: 'ngaytb' },
+        { title: 'Công suất giường bệnh KH', curr: tbCongsuat, prev: tbCongsuatPrev, kh: kh.congsuat, ht: ht.congsuat, unit: '%', type: 'congsuat' }
     ];
     
     const kpiGrid = document.getElementById('kpiGrid');
