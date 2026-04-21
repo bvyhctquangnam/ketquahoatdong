@@ -13,7 +13,7 @@ const monthlyData = {
         2022: [20, 30, 122, 184, 200, 320, 383, 424, 230, 247, 287, 290],
         2023: [110, 120, 374, 406, 187, 298, 318, 207, 104, 114, 105, 121],
         2024: [57, 32, 121, 127, 78, 90, 102, 107, 133, 208, 293, 270],
-        2025: [162, 321, 388, 324, 379, 403, 428, 361, 386, 295, 331, 307],
+        2025: [162, 109, 290, 347, 231, 274, 350, 407, 224, 357, 222, 325],
         2026: [146, 108, 228, null, null, null, null, null, null, null, null, null]
     },
     ngaydt: {
@@ -72,7 +72,6 @@ function formatValue(value, metric, isKh = false) {
 }
 
 // ==================== TÍNH NGÀY ĐT TRUNG BÌNH ====================
-// Công thức: Ngày ĐT TB = Tổng ngày điều trị / Tổng số nội trú
 function tinhNgayDTTrungBinhThang(nam, thang) {
     const ngaydt = monthlyData.ngaydt[nam]?.[thang];
     const noitru = monthlyData.noitru[nam]?.[thang];
@@ -107,7 +106,7 @@ function getNgayDTTrungBinhTheoThang(nam) {
 }
 
 // ==================== TÍNH CÔNG SUẤT GIƯỜNG ====================
-// Công thức: Công suất = (Ngày điều trị) / (Số giường KH × Số ngày trong tháng) × 100%
+// Công thức tháng: Ngày điều trị tháng / (Số giường × Số ngày trong tháng) × 100%
 function tinhCongSuatThang(nam, thang) {
     const ngaydt = monthlyData.ngaydt[nam]?.[thang];
     if (ngaydt === null) return null;
@@ -119,6 +118,7 @@ function tinhCongSuatThang(nam, thang) {
     return (ngaydt / (soGiuong * ngayTrongThang)) * 100;
 }
 
+// Tính công suất trung bình cho các tháng đã có dữ liệu
 function tinhCongSuatTrungBinhNam(nam) {
     const ngaydt = monthlyData.ngaydt[nam];
     if (!ngaydt) return 0;
@@ -126,6 +126,7 @@ function tinhCongSuatTrungBinhNam(nam) {
     let tongNgaydt = 0;
     let tongNgayTrongThang = 0;
     const soGiuong = soGiuongKH[nam];
+    const soThangCoDuLieu = countValid(ngaydt);
     
     for (let i = 0; i < 12; i++) {
         if (ngaydt[i] !== null) {
@@ -136,7 +137,14 @@ function tinhCongSuatTrungBinhNam(nam) {
         }
     }
     
-    if (tongNgayTrongThang === 0) return 0;
+    if (tongNgayTrongThang === 0 || soGiuong === 0) return 0;
+    
+    // Nếu đã có đủ 12 tháng, dùng mẫu số 365 (cố định theo quy chuẩn y tế)
+    if (soThangCoDuLieu === 12) {
+        return (tongNgaydt / (soGiuong * 365)) * 100;
+    }
+    
+    // Chưa đủ 12 tháng, dùng tổng số ngày thực tế của các tháng đó
     return (tongNgaydt / (soGiuong * tongNgayTrongThang)) * 100;
 }
 
@@ -210,11 +218,11 @@ function updateDashboard() {
     
     // ==================== KPI CARDS ====================
     const kpis = [
-        { title: 'Tổng số lượt khám bệnh', curr: tongKham, prev: tongKhamPrev, kh: kh.kham, ht: ht.kham, unit: 'lượt', type: 'kham' },
-        { title: 'Tổng số lượt nội trú', curr: tongNoitru, prev: tongNoitruPrev, kh: kh.noitru, ht: ht.noitru, unit: 'lượt', type: 'noitru' },
-        { title: 'Tổng số ngày điều trị', curr: tongNgaydt, prev: tongNgaydtPrev, kh: kh.ngaydt, ht: ht.ngaydt, unit: 'ngày', type: 'ngaydt' },
-        { title: 'Ngày điều trị trung bình', curr: tbNgaydt, prev: tbNgaydtPrev, kh: kh.ngaytb, ht: ht.ngaytb, unit: 'ngày', type: 'ngaytb' },
-        { title: 'Công suất giường bệnh KH', curr: tbCongsuat, prev: tbCongsuatPrev, kh: kh.congsuat, ht: ht.congsuat, unit: '%', type: 'congsuat' }
+        { title: 'Tổng lượt khám', curr: tongKham, prev: tongKhamPrev, kh: kh.kham, ht: ht.kham, unit: 'lượt', type: 'kham' },
+        { title: 'Tổng lượt nội trú', curr: tongNoitru, prev: tongNoitruPrev, kh: kh.noitru, ht: ht.noitru, unit: 'lượt', type: 'noitru' },
+        { title: 'Tổng ngày điều trị', curr: tongNgaydt, prev: tongNgaydtPrev, kh: kh.ngaydt, ht: ht.ngaydt, unit: 'ngày', type: 'ngaydt' },
+        { title: 'Ngày ĐT trung bình', curr: tbNgaydt, prev: tbNgaydtPrev, kh: kh.ngaytb, ht: ht.ngaytb, unit: 'ngày', type: 'ngaytb' },
+        { title: 'Công suất thực tế', curr: tbCongsuat, prev: tbCongsuatPrev, kh: kh.congsuat, ht: ht.congsuat, unit: '%', type: 'congsuat' }
     ];
     
     const kpiGrid = document.getElementById('kpiGrid');
@@ -312,7 +320,7 @@ function updateDashboard() {
         const htColor = getColorByPercent(phanTram);
         
         let displayValue;
-        if (metric.isAvg || metric.isAvg === true) {
+        if (metric.isAvg === true) {
             displayValue = total.toFixed(1) + (metric.isPercent ? '%' : '');
         } else {
             displayValue = total.toLocaleString('vi-VN') + (metric.isPercent ? '%' : '');
@@ -326,8 +334,8 @@ function updateDashboard() {
                 if (metric.key === 'ngaytb') return `<td>${v.toFixed(1)}</td>`;
                 return `<td>${v.toLocaleString('vi-VN')}</td>`;
             }).join('')}
-            <td class="year-col">${displayValue}${(metric.isAvg || metric.isAvg === true) && validCount < 12 ? ` <span style="font-size:0.6rem;">(/${validCount} th)</span>` : ''}</td>
-            <td class="year-col">${(metric.isAvg || metric.isAvg === true) ? khValue.toFixed(1) + (metric.isPercent ? '%' : '') : khValue.toLocaleString('vi-VN') + (metric.isPercent ? '%' : '')}</td>
+            <td class="year-col">${displayValue}${(metric.isAvg === true) && validCount < 12 ? ` <span style="font-size:0.6rem;">(/${validCount} th)</span>` : ''}</td>
+            <td class="year-col">${(metric.isAvg === true) ? khValue.toFixed(1) + (metric.isPercent ? '%' : '') : khValue.toLocaleString('vi-VN') + (metric.isPercent ? '%' : '')}</td>
             <td class="year-col" style="color:${htColor};">${phanTram.toFixed(1)}%</td>
         </tr>`;
     });
