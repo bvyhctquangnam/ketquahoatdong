@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Dashboard | Báo cáo 12 tháng</title>
+    <title>Dashboard | Báo cáo 12 tháng - Bệnh viện YHCT Quảng Nam</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">    
     <link rel="stylesheet" href="style.css">    
@@ -34,39 +34,98 @@
         </div>
     </div>
 
-    <!-- 5 KPI chính -->
     <div class="kpi-grid" id="kpiGrid"></div>
 
-    <!-- Biểu đồ -->
-    <div class="chart-section">
-        <div class="chart-header">
-            <h3><i class="fas fa-chart-line"></i> Xu hướng theo tháng</h3>
-            <div class="chart-tabs" id="chartTabs">
-                <div class="chart-tab active" data-metric="kham">Khám bệnh</div>
-                <div class="chart-tab" data-metric="noitru">Nội trú</div>
-                <div class="chart-tab" data-metric="ngaydt">Ngày điều trị</div>
-                <div class="chart-tab" data-metric="congsuat">Công suất giường</div>
+    <!-- Chart section với 2 cột: Line Chart (70%) + Bar Chart (30%) -->
+    <div class="chart-row">
+        <div class="chart-line-section">
+            <div class="chart-header">
+                <h3><i class="fas fa-chart-line"></i> Xu hướng theo tháng</h3>
+                <div class="chart-tabs" id="chartTabs">
+                    <div class="chart-tab active" data-metric="kham">Khám bệnh</div>
+                    <div class="chart-tab" data-metric="noitru">Nội trú</div>
+                    <div class="chart-tab" data-metric="ngaydt">Ngày điều trị</div>
+                    <div class="chart-tab" data-metric="congsuat">Công suất giường</div>
+                    <div class="chart-tab" data-metric="bhyt_rate">Tỷ lệ BHYT</div>
+                    <div class="chart-tab" data-metric="noitru_banngay">Điều trị ban ngày</div>
+                </div>
             </div>
+            <canvas id="trendChart"></canvas>
         </div>
-        <canvas id="trendChart"></canvas>
+        <div class="chart-bar-section">
+            <div class="chart-header">
+                <h3><i class="fas fa-chart-bar"></i> So sánh <span id="barCompareYear">2025</span> vs <span id="barCurrentYear">2026</span></h3>
+                <div class="bar-chart-title" id="barChartTitle">Khám bệnh</div>
+            </div>
+            <canvas id="barChart"></canvas>
+        </div>
     </div>
 
-    <!-- Bảng dữ liệu -->
-    <div class="table-section">
-        <div class="table-header">
-            <h3><i class="fas fa-table"></i> Chi tiết 12 tháng</h3>
-            <span style="font-size: 0.65rem;"><i class="fas fa-info-circle"></i> Đơn vị: lượt (trừ ngày ĐT, công suất %)</span>
+    <!-- Bố cục 2 cột: Bảng chi tiết (70%) | Bảng giường + biểu đồ tròn (30%) -->
+    <div class="two-columns">
+        <!-- Cột trái: Bảng chi tiết (70%) -->
+        <div class="left-column">
+            <div class="table-section">
+                <div class="table-header">
+                    <h3><i class="fas fa-table"></i> Chi tiết 12 tháng</h3>
+                    <div class="table-legend">
+                        <span><i class="fas fa-circle" style="color: #eef5ff; font-size: 0.5rem;"></i> Báo cáo Sở Y tế</span>
+                        <span><i class="fas fa-circle" style="color: #facc15; font-size: 0.5rem;"></i> Báo cáo nội bộ</span>
+                    </div>
+                </div>
+                <div style="overflow-x: auto;">
+                    <table class="data-table" id="dataTable">
+                        <thead id="tableHeader"></thead>
+                        <tbody id="tableBody"></tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-        <div style="overflow-x: auto;">
-            <table class="data-table" id="dataTable">
-                <thead id="tableHeader"></thead>
-                <tbody id="tableBody"></tbody>
-            </table>
+
+        <!-- Cột phải: Biểu đồ tròn + Bảng giường bệnh (30%) -->
+        <div class="right-column">
+            <!-- Biểu đồ tròn cơ cấu BHYT/Viện phí -->
+            <div class="pie-section">
+                <h4><i class="fas fa-chart-pie"></i> Tỷ lệ sử dụng thẻ BHYT năm <span id="pieYear">2026</span></h4>
+                <div class="pie-container">
+                    <canvas id="pieChart" width="120" height="120"></canvas>
+                    <div class="pie-legend">
+                        <span><i class="fas fa-square" style="color: #2dd4bf;"></i> BHYT: <span id="pieBhyt">0</span></span>
+                        <span><i class="fas fa-square" style="color: #facc15;"></i> Viện phí: <span id="pieVp">0</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bảng giường bệnh theo khoa (3 cột) -->
+            <div class="bed-table-section">
+                <h4><i class="fas fa-bed"></i> Phân bổ giường bệnh năm <span id="bedYear">2026</span></h4>
+                <div class="bed-three-columns">
+                    <div class="bed-col">
+                        <div class="bed-title">Giường nội trú</div>
+                        <table class="bed-table">
+                            <tbody id="noitruBedTable"></tbody>
+                        </table>
+                        <div class="bed-total" id="noitruTotalBed">Tổng: 0</div>
+                    </div>
+                    <div class="bed-col">
+                        <div class="bed-title">Giường ban ngày</div>
+                        <table class="bed-table">
+                            <tbody id="banngayBedTable"></tbody>
+                        </table>
+                        <div class="bed-total" id="banngayTotalBed">Tổng: 0</div>
+                    </div>
+                    <div class="bed-col">
+                        <div class="bed-title">Tổng giường khoa</div>
+                        <table class="bed-table">
+                            <tbody id="tongBedTable"></tbody>
+                        </table>
+                        <div class="bed-total" id="tongTotalBed">Tổng: 0</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="footer-note">
-        <i class="fas fa-database"></i> Dữ liệu nội bộ | Cập nhật 2026
-    </div>
+    
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>

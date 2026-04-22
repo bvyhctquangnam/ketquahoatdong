@@ -1,205 +1,486 @@
 * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        body {
-            background: #0a0f1a;
-            font-family: 'Inter', sans-serif;
-            padding: 10px 16px;
-            color: #eef5ff;
-            height: 100vh;
-            overflow-y: auto;
-        }
+body {
+    background: #0a0f1a;
+    font-family: 'Inter', sans-serif;
+    padding: 10px 10px;
+    color: #eef5ff;
+    height: 100vh;
+    overflow-y: auto;
+}
 
-        /* Dashboard chiếm full width */
-        .dashboard {
-            width: 100%;
-            max-width: 100%;
-            margin: 0 auto;
-        }
+.dashboard {
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+}
 
-        /* Header - gọn */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-            flex-wrap: wrap;
-            gap: 10px;
-            background: linear-gradient(135deg, #0f1820, #0a121a);
-            padding: 5px 20px;
-            border-radius: 30px;
-            border: 1px solid #2a3a4a;
-        }
-        .title-section h1 {
-            font-size: 1.2rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #60e0c0, #3080c0);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        .title-section p { font-size: 1rem; color: #7a9aa8; margin-top: 2px; }
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
 
-        /* Filter bar */
-        .filter-bar {
-            background: #0e1620;
-            border-radius: 30px;
-            padding: 6px 20px;
-            display: flex;
-            gap: 20px;
-            align-items: center;
-            flex-wrap: wrap;
-            margin-bottom: 16px;
-            border: 1px solid #2a3a4a;
-        }
-        .filter-group label { font-size: 0.75rem; color: #7a9aa8; }
-        .filter-group select {
-            background: #0a0f1a;
-            border: 1px solid #2a5a5a;
-            color: #eef5ff;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            cursor: pointer;
-        }
-        .compare-badge {
-            background: #1a3a3a;
-            padding: 4px 14px;
-            border-radius: 20px;
-            font-size: 0.7rem;
-            color: #50e0c0;
-        }
+.title-section h1 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #60e0c0, #3080c0);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
 
-        /* KPI Cards - 5 cột đều nhau trên desktop */
-        .kpi-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 12px;
-            margin-bottom: 10px;
-        }
-        .kpi-card {
-            background: linear-gradient(145deg, #0f1820, #0a121a);
-            border-radius: 18px;
-            padding: 10px 14px;
-            border-left: 3px solid;
-            transition: all 0.2s;
-        }
-        .kpi-card:nth-child(1) { border-left-color: #2dd4bf; }
-        .kpi-card:nth-child(2) { border-left-color: #facc15; }
-        .kpi-card:nth-child(3) { border-left-color: #a78bfa; }
-        .kpi-card:nth-child(4) { border-left-color: #fb7185; }
-        .kpi-card:nth-child(5) { border-left-color: #34d399; }
+.title-section p {
+    font-size: 1rem;
+    color: #7a9aa8;
+    margin-top: 2px;
+}
 
-        .kpi-title {
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            font-weight: 600;
-            color: #8aabba;
-            margin-bottom: 6px;
-        }
-        .kpi-value {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: white;
-            line-height: 1.2;
-        }
-        .kpi-compare {
-            font-size: 0.7rem;
-            margin-top: 6px;
-            padding-top: 5px;
-            border-top: 1px solid #2a3a4a;
-        }
-        .trend-up { color: #2dd4bf; }
-        .trend-down { color: #fb7185; }
+/* Filter bar */
+.filter-bar {
+    background: #0e1620;
+    border-radius: 30px;
+    padding: 5px 18px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+    border: 1px solid #2a3a4a;
+}
 
-        /* Chart section - cân đối */
-        .chart-section {
-            background: #0e1620;
-            border-radius: 20px;
-            padding: 12px 18px;
-            margin-bottom: 10px;
-            border: 1px solid #2a3a4a;
-        }
-        .chart-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid #2a3a4a;
-        }
-        .chart-header h3 { font-size: 0.85rem; font-weight: 600; color: #c0e0e0; }
-        .chart-tabs { display: flex; gap: 8px; }
-        .chart-tab {
-            background: #0a121a;
-            border: 1px solid #2a5a5a;
-            padding: 4px 14px;
-            border-radius: 20px;
-            font-size: 0.7rem;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .chart-tab.active { background: #2a6a6a; border-color: #50e0c0; color: white; }
-        .chart-tab:hover { background: #1a4a4a; }
-        canvas { max-height: 220px !important; width: 100%; }
+.filter-group label {
+    font-size: 0.7rem;
+    color: #7a9aa8;
+}
 
-        /* Table section - font vừa phải */
-        .table-section {
-            background: #0e1620;
-            border-radius: 20px;
-            padding: 12px 18px;
-            border: 1px solid #2a3a4a;
-        }
-        .table-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid #2a3a4a;
-        }
-        .table-header h3 { font-size: 0.85rem; font-weight: 600; }
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.7rem;
-        }
-        .data-table th {
-            text-align: center;
-            padding: 8px 4px;
-            background: #0a1a1a;
-            color: #aaccc0;
-            font-weight: 600;
-        }
-        .data-table td {
-            text-align: center;
-            padding: 6px 4px;
-            border-bottom: 1px solid #1a3a3a;
-        }
-        .data-table tr:hover { background: #0a1a1a; }
-        .year-col { background: #1a3a3a; font-weight: 700; color: #50e0c0; }
+.filter-group select {
+    background: #0a0f1a;
+    border: 1px solid #2a5a5a;
+    color: #eef5ff;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    cursor: pointer;
+}
 
-        .footer-note {
-            text-align: center;
-            margin-top: 10px;
-            font-size: 0.75rem;
-            color: #5a8a7a;
-            padding-top: 5px;
-            border-top: 1px solid #2a3a4a;
-        }
+.compare-badge {
+    background: #1a3a3a;
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    color: #50e0c0;
+}
 
-        /* Responsive: trên mobile vẫn ok */
-        @media (max-width: 1000px) {
-            body { padding: 8px 12px; }
-            .kpi-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
-            .kpi-value { font-size: 1.2rem; }
-            .data-table { font-size: 0.6rem; }
-            canvas { max-height: 180px; }
-        }
+/* KPI Grid */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    margin-bottom: 12px;
+}
 
-        @media (max-width: 700px) {
-            .kpi-grid { grid-template-columns: 1fr; }
-            .chart-tabs { flex-wrap: wrap; }
-        }
+.kpi-card {
+    background: linear-gradient(145deg, #0f1820, #0a121a);
+    border-radius: 12px;
+    padding: 5px 10px;
+    border-left: 3px solid;
+    transition: all 0.2s;
+}
+
+.kpi-card:nth-child(1) { border-left-color: #2dd4bf; }
+.kpi-card:nth-child(2) { border-left-color: #facc15; }
+.kpi-card:nth-child(3) { border-left-color: #a78bfa; }
+.kpi-card:nth-child(4) { border-left-color: #fb7185; }
+.kpi-card:nth-child(5) { border-left-color: #34d399; }
+.kpi-card:nth-child(6) { border-left-color: #f97316; }
+.kpi-card:nth-child(7) { border-left-color: #06b6d4; }
+
+.kpi-title {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #8aabba;
+    margin-bottom: 4px;
+}
+
+.kpi-value {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: white;
+    line-height: 1.2;
+}
+
+.kpi-compare {
+    font-size: 0.6rem;
+    margin-top: 5px;
+    padding-top: 4px;
+    border-top: 1px solid #2a3a4a;
+}
+
+.kpi-compare div {
+    margin-top: 1px;
+}
+
+.trend-up { color: #2dd4bf; }
+.trend-down { color: #fb7185; }
+
+/* Chart Row - 2 cột: Line chart 70%, Bar chart 30% - CĂN CHỈNH CHIỀU CAO ĐỒNG ĐỀU */
+.chart-row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 12px;
+    align-items: stretch;
+}
+
+.chart-line-section {
+    flex: 7;
+    background: #0e1620;
+    border-radius: 12px;
+    padding: 10px 10px;
+    border: 1px solid #2a3a4a;
+    display: flex;
+    flex-direction: column;
+}
+
+.chart-bar-section {
+    flex: 3;
+    background: #0e1620;
+    border-radius: 12px;
+    padding: 10px 10px;
+    border: 1px solid #2a3a4a;
+    display: flex;
+    flex-direction: column;
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #2a3a4a;
+    flex-wrap: wrap;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.chart-header h3 {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #c0e0e0;
+}
+
+.chart-tabs {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.chart-tab {
+    background: #0a121a;
+    border: 1px solid #2a5a5a;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.65rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.chart-tab.active {
+    background: #2a6a6a;
+    border-color: #50e0c0;
+    color: white;
+}
+
+.chart-tab:hover {
+    background: #1a4a4a;
+}
+
+.bar-chart-title {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: white;
+    background: #0a1a1a;
+    padding: 4px 10px;
+    border-radius: 20px;
+}
+
+/* Cố định chiều cao cho canvas để đồng bộ */
+.chart-line-section canvas {
+    max-height: 200px !important;
+    width: 100%;
+    flex: 1;
+}
+
+.chart-bar-section canvas {
+    max-height: 200px !important;
+    width: 100%;
+    flex: 1;
+}
+
+/* Two columns layout - CÙNG TỈ LỆ 70%-30% VỚI CHART-ROW */
+.two-columns {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 12px;
+    align-items: stretch;
+}
+
+.left-column {
+    flex: 7;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.right-column {
+    flex: 3;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Table section left */
+.table-section {
+    background: #0e1620;
+    border-radius: 12px;
+    padding: 10px 10px;
+    border: 1px solid #2a3a4a;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #2a3a4a;
+    flex-wrap: wrap;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.table-header h3 {
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.table-legend {
+    display: flex;
+    gap: 15px;
+    font-size: 0.6rem;
+    color: #8aabba;
+}
+
+.table-legend span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.65rem;
+}
+
+.data-table th {
+    text-align: center;
+    padding: 6px 4px;
+    background: #0a1a1a;
+    color: #aaccc0;
+    font-weight: 600;
+    border-bottom: 1px solid #2a3a4a;
+}
+
+.data-table td {
+    text-align: center;
+    padding: 5px 4px;
+    border-bottom: 1px solid #1a3a3a;
+}
+
+.data-table tr:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.year-col {
+    background: #1a3a3a;
+    font-weight: 700;
+    color: #50e0c0;
+}
+
+/* Pie section */
+.pie-section {
+    background: #0e1620;
+    border-radius: 12px;
+    padding: 10px 10px;
+    border: 1px solid #2a3a4a;
+}
+
+.pie-section h4 {
+    font-size: 0.75rem;
+    color: #8aabba;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.pie-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.pie-container canvas {
+    max-width: 100px !important;
+    max-height: 100px !important;
+}
+
+.pie-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 0.7rem;
+}
+
+.pie-legend span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Bed table section - 3 columns */
+.bed-table-section {
+    background: #0e1620;
+    border-radius: 12px;
+    padding: 10px 10px;
+    border: 1px solid #2a3a4a;
+}
+
+.bed-table-section h4 {
+    font-size: 0.75rem;
+    color: #8aabba;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.bed-three-columns {
+    display: flex;
+    gap: 12px;
+}
+
+.bed-col {
+    flex: 1;
+}
+
+.bed-title {
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: #50e0c0;
+    text-align: center;
+    padding: 5px;
+    background: #0a1a1a;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+
+.bed-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.65rem;
+}
+
+.bed-table td {
+    padding: 4px 6px;
+    border-bottom: 1px solid #1a3a3a;
+}
+
+.bed-table td:first-child {
+    text-align: left;
+    color: #aaccc0;
+}
+
+.bed-table td:last-child {
+    text-align: right;
+    color: #eef5ff;
+    font-weight: 600;
+}
+
+.bed-total {
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #facc15;
+    text-align: center;
+    margin-top: 8px;
+    padding-top: 6px;
+    border-top: 1px solid #2a3a4a;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .chart-row {
+        flex-direction: column;
+    }
+    .two-columns {
+        flex-direction: column;
+    }
+    .left-column, .right-column {
+        flex: 1;
+    }
+    .bed-three-columns {
+        flex-direction: column;
+        gap: 16px;
+    }
+}
+
+@media (max-width: 1400px) {
+    .kpi-grid { grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    .kpi-value { font-size: 1.2rem; }
+}
+
+@media (max-width: 1000px) {
+    body { padding: 10px 16px; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .kpi-value { font-size: 1.1rem; }
+    .data-table { font-size: 0.6rem; }
+    .chart-line-section canvas, .chart-bar-section canvas { max-height: 180px; }
+}
+
+@media (max-width: 700px) {
+    .kpi-grid { grid-template-columns: 1fr; }
+    .chart-tabs { flex-wrap: wrap; }
+    .table-legend { flex-wrap: wrap; gap: 8px; }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0a121a;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #2a5a5a;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #3a7a7a;
+}

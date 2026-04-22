@@ -23,33 +23,91 @@ const monthlyData = {
         2024: [1140, 539, 2126, 2068, 1150, 1570, 1754, 1745, 2298, 4271, 4879, 3923],
         2025: [2172, 1391, 4679, 5288, 3560, 4217, 5546, 6008, 3552, 5779, 3331, 4962],
         2026: [2079, 1481, 3334, null, null, null, null, null, null, null, null, null]
+    },
+    bhyt_count: {
+        2021: [840, 455, 1274, 956, 474, 700, 560, 206, 164, 455, 305, 108],
+        2022: [81, 146, 300, 318, 468, 562, 496, 469, 391, 406, 501, 357],
+        2023: [141, 421, 536, 342, 435, 325, 188, 101, 105, 107, 72, 53],
+        2024: [39, 61, 90, 60, 84, 83, 80, 92, 212, 261, 301, 283],
+        2025: [112, 241, 299, 246, 284, 314, 330, 274, 290, 227, 258, 236],
+        2026: [201, 84, 324, null, null, null, null, null, null, null, null, null]
+    },
+    ngoaitru: {
+        2021: [312, 178, 456, 358, 182, 255, 213, 81, 61, 164, 114, 42],
+        2022: [31, 54, 108, 116, 176, 200, 179, 171, 147, 151, 181, 131],
+        2023: [53, 154, 190, 123, 161, 114, 67, 37, 38, 38, 26, 19],
+        2024: [14, 22, 31, 21, 30, 29, 28, 33, 76, 92, 104, 99],
+        2025: [41, 86, 104, 87, 101, 108, 114, 96, 103, 79, 88, 82],
+        2026: [72, 29, 111, null, null, null, null, null, null, null, null, null]
+    },
+    noitru_banngay: {
+        2021: [42, 22, 76, 94, 28, 24, 37, 7, 5, 21, 66, 49],
+        2022: [3, 5, 19, 29, 31, 50, 60, 67, 36, 39, 45, 46],
+        2023: [17, 19, 59, 64, 29, 47, 50, 33, 16, 18, 17, 19],
+        2024: [9, 5, 19, 20, 12, 14, 16, 17, 21, 33, 46, 43],
+        2025: [25, 17, 46, 55, 37, 44, 56, 65, 36, 57, 35, 52],
+        2026: [23, 17, 36, null, null, null, null, null, null, null, null, null]
+    },
+    noitru_24h: {
+        2021: [226, 117, 407, 503, 148, 128, 200, 35, 27, 111, 350, 264],
+        2022: [17, 25, 103, 155, 169, 270, 323, 357, 194, 208, 242, 244],
+        2023: [93, 101, 315, 342, 158, 251, 268, 174, 88, 96, 88, 102],
+        2024: [48, 27, 102, 107, 66, 76, 86, 90, 112, 175, 247, 227],
+        2025: [137, 92, 244, 292, 194, 230, 294, 342, 188, 300, 187, 273],
+        2026: [123, 91, 192, null, null, null, null, null, null, null, null, null]
+    },
+    chuyenvien: {
+        2021: [5, 3, 8, 7, 4, 3, 5, 1, 1, 2, 6, 4],
+        2022: [1, 1, 3, 4, 3, 5, 6, 7, 3, 4, 5, 5],
+        2023: [2, 2, 6, 5, 3, 5, 4, 3, 2, 2, 2, 2],
+        2024: [1, 1, 2, 2, 1, 2, 2, 2, 3, 4, 5, 4],
+        2025: [3, 2, 5, 6, 4, 5, 7, 8, 4, 6, 4, 6],
+        2026: [2, 2, 4, null, null, null, null, null, null, null, null, null]
     }
 };
 
-// ==================== SỐ GIƯỜNG KẾ HOẠCH THEO NĂM ====================
+// ==================== DỮ LIỆU GIƯỜNG BỆNH THEO KHOA ====================
+const bedData = {
+    noitru: {
+        2021: { tong: 190, khoa: { Noi: 47, Ngoai: 29, Lao: 47, ChamCuu: 29, PHCN: 38 } },
+        2022: { tong: 190, khoa: { Noi: 47, Ngoai: 29, Lao: 47, ChamCuu: 29, PHCN: 38 } },
+        2023: { tong: 190, khoa: { Noi: 47, Ngoai: 29, Lao: 47, ChamCuu: 29, PHCN: 38 } },
+        2024: { tong: 170, khoa: { Noi: 42, Ngoai: 26, Lao: 42, ChamCuu: 26, PHCN: 34 } },
+        2025: { tong: 150, khoa: { Noi: 37, Ngoai: 23, Lao: 37, ChamCuu: 23, PHCN: 30 } },
+        2026: { tong: 123, khoa: { Noi: 32, Ngoai: 17, Lao: 32, ChamCuu: 19, PHCN: 23 } }
+    },
+    banngay: {
+        2021: { tong: 27, khoa: { Noi: 5, Ngoai: 6, Lao: 5, ChamCuu: 4, PHCN: 7 } },
+        2022: { tong: 27, khoa: { Noi: 5, Ngoai: 6, Lao: 5, ChamCuu: 4, PHCN: 7 } },
+        2023: { tong: 27, khoa: { Noi: 5, Ngoai: 6, Lao: 5, ChamCuu: 4, PHCN: 7 } },
+        2024: { tong: 27, khoa: { Noi: 5, Ngoai: 6, Lao: 5, ChamCuu: 4, PHCN: 7 } },
+        2025: { tong: 27, khoa: { Noi: 5, Ngoai: 6, Lao: 5, ChamCuu: 4, PHCN: 7 } },
+        2026: { tong: 27, khoa: { Noi: 5, Ngoai: 6, Lao: 5, ChamCuu: 4, PHCN: 7 } }
+    }
+};
+
 const soGiuongKH = { 2021: 190, 2022: 190, 2023: 190, 2024: 170, 2025: 150, 2026: 150 };
 
-// ==================== KẾ HOẠCH NĂM (CHỈ TIÊU GIAO) ====================
 const keHoachNam = {
     kham: { 2021: 14037, 2022: 14037, 2023: 22027, 2024: 4400, 2025: 2396, 2026: 3590 },
     noitru: { 2021: 4037, 2022: 3853, 2023: 3777, 2024: 2860, 2025: 1780, 2026: 2890 },
     ngaydt: { 2021: 70953, 2022: 69350, 2023: 62415, 2024: 62050, 2025: 30209, 2026: 52013 },
     ngaytb: { 2021: 17.6, 2022: 18.0, 2023: 16.5, 2024: 21.7, 2025: 17.0, 2026: 18.0 },
-    congsuat: { 2021: 100, 2022: 100, 2023: 100, 2024: 100, 2025: 100, 2026: 100 }
+    congsuat: { 2021: 100, 2022: 100, 2023: 100, 2024: 100, 2025: 100, 2026: 100 },
+    bhyt_rate: { 2021: 72, 2022: 73, 2023: 74, 2024: 75, 2025: 76, 2026: 78 }
 };
 
-// ==================== HẰNG SỐ ====================
 const monthsShort = ['T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8', 'T9', 'T10', 'T11', 'T12'];
 const monthsFull = ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'];
 const soNgayTrongThang = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
-// ==================== BIẾN TOÀN CỤC ====================
 let currentYear = 2026;
 let compareYear = 2025;
 let currentMetric = 'kham';
 let chartInstance = null;
+let pieChartInstance = null;
+let barChartInstance = null;
 
-// ==================== HÀM TIỆN ÍCH ====================
 function isNamNhuan(nam) {
     return (nam % 4 === 0 && nam % 100 !== 0) || (nam % 400 === 0);
 }
@@ -59,17 +117,11 @@ function sumIgnoreNull(arr) {
     return arr.filter(v => v !== null).reduce((a, b) => a + b, 0);
 }
 
-function sumFirstNNotNull(arr, n) {
+function avgIgnoreNull(arr) {
     if (!arr) return 0;
-    let count = 0;
-    let sum = 0;
-    for (let i = 0; i < arr.length && count < n; i++) {
-        if (arr[i] !== null) {
-            sum += arr[i];
-            count++;
-        }
-    }
-    return sum;
+    const valid = arr.filter(v => v !== null);
+    if (valid.length === 0) return 0;
+    return valid.reduce((a, b) => a + b, 0) / valid.length;
 }
 
 function countValid(arr) {
@@ -80,61 +132,40 @@ function formatValue(value, metric, isKh = false) {
     if (value === null || value === undefined) return '—';
     if (metric === 'congsuat') return value.toFixed(1) + '%';
     if (metric === 'ngaytb') return value.toFixed(1);
-    if (isKh && metric === 'kham') return value.toLocaleString('vi-VN');
+    if (metric === 'bhyt_rate') return value.toFixed(1) + '%';
     return value.toLocaleString('vi-VN');
 }
 
-// Lấy số tháng có dữ liệu của năm
 function getSoThangCoDuLieu(nam, metricKey) {
     const data = monthlyData[metricKey]?.[nam];
     if (!data) return 0;
     return data.filter(v => v !== null).length;
 }
 
-// Tính tổng cho năm so sánh (cùng kỳ nếu năm hiện tại chưa đủ)
 function tinhTongSoSanh(namHienTai, namSoSanh, metricKey) {
     const dataHienTai = monthlyData[metricKey]?.[namHienTai];
     const dataSoSanh = monthlyData[metricKey]?.[namSoSanh];
-    
     if (!dataHienTai || !dataSoSanh) return 0;
-    
     const soThangHienTai = countValid(dataHienTai);
-    const soThangSoSanh = countValid(dataSoSanh);
-    
-    // Nếu năm hiện tại chưa đủ 12 tháng, chỉ lấy số tháng tương ứng từ năm so sánh
     if (soThangHienTai < 12 && soThangHienTai > 0) {
-        let count = 0;
-        let sum = 0;
+        let count = 0, sum = 0;
         for (let i = 0; i < dataSoSanh.length && count < soThangHienTai; i++) {
-            if (dataSoSanh[i] !== null) {
-                sum += dataSoSanh[i];
-                count++;
-            }
+            if (dataSoSanh[i] !== null) { sum += dataSoSanh[i]; count++; }
         }
         return sum;
     }
-    
-    // Năm hiện tại đã đủ dữ liệu, lấy tổng cả năm so sánh
     return sumIgnoreNull(dataSoSanh);
 }
 
-// Tính trung bình cho năm so sánh (cùng kỳ)
-function tinhTrungBinhSoSanh(namHienTai, namSoSanh, metricKey, isAvg = false) {
+function tinhTrungBinhSoSanh(namHienTai, namSoSanh, metricKey) {
     if (metricKey === 'congsuat') {
-        // Công suất cần tính theo công thức đặc biệt
         const ngaydtHienTai = monthlyData.ngaydt[namHienTai];
         const ngaydtSoSanh = monthlyData.ngaydt[namSoSanh];
         if (!ngaydtHienTai || !ngaydtSoSanh) return 0;
-        
         const soThangHienTai = countValid(ngaydtHienTai);
         const soGiuong = soGiuongKH[namSoSanh];
-        
         if (soThangHienTai < 12 && soThangHienTai > 0) {
-            // Tính tổng ngày điều trị và tổng số ngày của các tháng tương ứng
-            let tongNgaydt = 0;
-            let tongNgayTrongThang = 0;
-            let count = 0;
-            
+            let tongNgaydt = 0, tongNgayTrongThang = 0, count = 0;
             for (let i = 0; i < ngaydtSoSanh.length && count < soThangHienTai; i++) {
                 if (ngaydtSoSanh[i] !== null) {
                     tongNgaydt += ngaydtSoSanh[i];
@@ -144,31 +175,19 @@ function tinhTrungBinhSoSanh(namHienTai, namSoSanh, metricKey, isAvg = false) {
                     count++;
                 }
             }
-            
-            if (tongNgayTrongThang === 0 || soGiuong === 0) return 0;
-            return (tongNgaydt / (soGiuong * tongNgayTrongThang)) * 100;
-        } else {
-            // Đủ 12 tháng, dùng công thức năm
-            const tongNgaydt = sumIgnoreNull(ngaydtSoSanh);
-            return (tongNgaydt / (soGiuong * 365)) * 100;
+            return tongNgayTrongThang === 0 || soGiuong === 0 ? 0 : (tongNgaydt / (soGiuong * tongNgayTrongThang)) * 100;
         }
+        return (sumIgnoreNull(ngaydtSoSanh) / (soGiuong * 365)) * 100;
     }
-    
     if (metricKey === 'ngaytb') {
         const ngaydtHienTai = monthlyData.ngaydt[namHienTai];
         const noitruHienTai = monthlyData.noitru[namHienTai];
         const ngaydtSoSanh = monthlyData.ngaydt[namSoSanh];
         const noitruSoSanh = monthlyData.noitru[namSoSanh];
-        
         if (!ngaydtHienTai || !noitruHienTai || !ngaydtSoSanh || !noitruSoSanh) return 0;
-        
         const soThangHienTai = countValid(ngaydtHienTai);
-        
         if (soThangHienTai < 12 && soThangHienTai > 0) {
-            let tongNgaydt = 0;
-            let tongNoitru = 0;
-            let count = 0;
-            
+            let tongNgaydt = 0, tongNoitru = 0, count = 0;
             for (let i = 0; i < ngaydtSoSanh.length && count < soThangHienTai; i++) {
                 if (ngaydtSoSanh[i] !== null && noitruSoSanh[i] !== null) {
                     tongNgaydt += ngaydtSoSanh[i];
@@ -177,24 +196,78 @@ function tinhTrungBinhSoSanh(namHienTai, namSoSanh, metricKey, isAvg = false) {
                 }
             }
             return tongNoitru > 0 ? tongNgaydt / tongNoitru : 0;
-        } else {
-            let tongNgaydt = 0;
-            let tongNoitru = 0;
-            for (let i = 0; i < 12; i++) {
-                if (ngaydtSoSanh[i] !== null && noitruSoSanh[i] !== null) {
-                    tongNgaydt += ngaydtSoSanh[i];
-                    tongNoitru += noitruSoSanh[i];
+        }
+        let tongNgaydt = 0, tongNoitru = 0;
+        for (let i = 0; i < 12; i++) {
+            if (ngaydtSoSanh[i] !== null && noitruSoSanh[i] !== null) {
+                tongNgaydt += ngaydtSoSanh[i];
+                tongNoitru += noitruSoSanh[i];
+            }
+        }
+        return tongNoitru > 0 ? tongNgaydt / tongNoitru : 0;
+    }
+    if (metricKey === 'bhyt_rate') {
+        const bhytHienTai = monthlyData.bhyt_count?.[namHienTai];
+        const khamHienTai = monthlyData.kham?.[namHienTai];
+        const bhytSoSanh = monthlyData.bhyt_count?.[namSoSanh];
+        const khamSoSanh = monthlyData.kham?.[namSoSanh];
+        if (!bhytHienTai || !khamHienTai || !bhytSoSanh || !khamSoSanh) return 0;
+        const soThangHienTai = countValid(bhytHienTai);
+        if (soThangHienTai < 12 && soThangHienTai > 0) {
+            let sumBhyt = 0, sumKham = 0, count = 0;
+            for (let i = 0; i < bhytSoSanh.length && count < soThangHienTai; i++) {
+                if (bhytSoSanh[i] !== null && khamSoSanh[i] !== null && khamSoSanh[i] > 0) {
+                    sumBhyt += bhytSoSanh[i];
+                    sumKham += khamSoSanh[i];
+                    count++;
                 }
             }
-            return tongNoitru > 0 ? tongNgaydt / tongNoitru : 0;
+            return sumKham > 0 ? (sumBhyt / sumKham) * 100 : 0;
         }
+        let sumBhyt = 0, sumKham = 0;
+        for (let i = 0; i < 12; i++) {
+            if (bhytSoSanh[i] !== null && khamSoSanh[i] !== null && khamSoSanh[i] > 0) {
+                sumBhyt += bhytSoSanh[i];
+                sumKham += khamSoSanh[i];
+            }
+        }
+        return sumKham > 0 ? (sumBhyt / sumKham) * 100 : 0;
     }
-    
-    // Các chỉ tiêu khác (kham, noitru, ngaydt)
+    if (metricKey === 'noitru_banngay') {
+        return tinhTongSoSanh(namHienTai, namSoSanh, 'noitru_banngay');
+    }
     return tinhTongSoSanh(namHienTai, namSoSanh, metricKey);
 }
 
-// ==================== TÍNH NGÀY ĐT TRUNG BÌNH ====================
+function tinhTyLeBhytNam(nam) {
+    const bhytData = monthlyData.bhyt_count[nam];
+    const khamData = monthlyData.kham[nam];
+    if (!bhytData || !khamData) return 0;
+    let sumBhyt = 0, sumKham = 0;
+    for (let i = 0; i < 12; i++) {
+        if (bhytData[i] !== null && khamData[i] !== null && khamData[i] > 0) {
+            sumBhyt += bhytData[i];
+            sumKham += khamData[i];
+        }
+    }
+    return sumKham > 0 ? (sumBhyt / sumKham) * 100 : 0;
+}
+
+function getTyLeBhytTheoThang(nam) {
+    const result = [];
+    const bhytData = monthlyData.bhyt_count[nam];
+    const khamData = monthlyData.kham[nam];
+    if (!bhytData || !khamData) return Array(12).fill(null);
+    for (let i = 0; i < 12; i++) {
+        if (bhytData[i] !== null && khamData[i] !== null && khamData[i] > 0) {
+            result.push((bhytData[i] / khamData[i]) * 100);
+        } else {
+            result.push(null);
+        }
+    }
+    return result;
+}
+
 function tinhNgayDTTrungBinhThang(nam, thang) {
     const ngaydt = monthlyData.ngaydt[nam]?.[thang];
     const noitru = monthlyData.noitru[nam]?.[thang];
@@ -206,49 +279,37 @@ function tinhNgayDTTrungBinhNam(nam) {
     const ngaydt = monthlyData.ngaydt[nam];
     const noitru = monthlyData.noitru[nam];
     if (!ngaydt || !noitru) return 0;
-    
-    let tongNgaydt = 0;
-    let tongNoitru = 0;
-    
+    let tongNgaydt = 0, tongNoitru = 0;
     for (let i = 0; i < 12; i++) {
         if (ngaydt[i] !== null && noitru[i] !== null) {
             tongNgaydt += ngaydt[i];
             tongNoitru += noitru[i];
         }
     }
-    
     return tongNoitru > 0 ? tongNgaydt / tongNoitru : 0;
 }
 
 function getNgayDTTrungBinhTheoThang(nam) {
     const result = [];
-    for (let i = 0; i < 12; i++) {
-        result.push(tinhNgayDTTrungBinhThang(nam, i));
-    }
+    for (let i = 0; i < 12; i++) result.push(tinhNgayDTTrungBinhThang(nam, i));
     return result;
 }
 
-// ==================== TÍNH CÔNG SUẤT GIƯỜNG ====================
 function tinhCongSuatThang(nam, thang) {
     const ngaydt = monthlyData.ngaydt[nam]?.[thang];
     if (ngaydt === null) return null;
-    
     const soGiuong = soGiuongKH[nam];
     let ngayTrongThang = soNgayTrongThang[thang];
     if (thang === 1 && isNamNhuan(nam)) ngayTrongThang = 29;
-    
     return (ngaydt / (soGiuong * ngayTrongThang)) * 100;
 }
 
 function tinhCongSuatTrungBinhNam(nam) {
     const ngaydt = monthlyData.ngaydt[nam];
     if (!ngaydt) return 0;
-    
-    let tongNgaydt = 0;
-    let tongNgayTrongThang = 0;
+    let tongNgaydt = 0, tongNgayTrongThang = 0;
     const soGiuong = soGiuongKH[nam];
     const soThangCoDuLieu = countValid(ngaydt);
-    
     for (let i = 0; i < 12; i++) {
         if (ngaydt[i] !== null) {
             tongNgaydt += ngaydt[i];
@@ -257,40 +318,27 @@ function tinhCongSuatTrungBinhNam(nam) {
             tongNgayTrongThang += ngayTrongThang;
         }
     }
-    
     if (tongNgayTrongThang === 0 || soGiuong === 0) return 0;
-    
-    if (soThangCoDuLieu === 12) {
-        return (tongNgaydt / (soGiuong * 365)) * 100;
-    }
-    
+    if (soThangCoDuLieu === 12) return (tongNgaydt / (soGiuong * 365)) * 100;
     return (tongNgaydt / (soGiuong * tongNgayTrongThang)) * 100;
 }
 
 function getCongSuatTheoThang(nam) {
     const result = [];
-    for (let i = 0; i < 12; i++) {
-        result.push(tinhCongSuatThang(nam, i));
-    }
+    for (let i = 0; i < 12; i++) result.push(tinhCongSuatThang(nam, i));
     return result;
 }
 
-// ==================== TÍNH % HOÀN THÀNH KẾ HOẠCH ====================
 function tinhPhanTramHT(actual, kh) {
     if (!kh || kh === 0) return 0;
     return (actual / kh) * 100;
 }
 
-// ==================== TÍNH CHÊNH LỆCH ====================
 function getChangeInfo(curr, prev) {
     if (prev === 0) return { percent: 0, icon: '→', colorClass: '' };
     const percent = ((curr - prev) / prev * 100).toFixed(1);
     const isUp = curr > prev;
-    return {
-        percent: Math.abs(percent),
-        icon: isUp ? '↑' : '↓',
-        colorClass: isUp ? 'trend-up' : 'trend-down'
-    };
+    return { percent: Math.abs(percent), icon: isUp ? '↑' : '↓', colorClass: isUp ? 'trend-up' : 'trend-down' };
 }
 
 function getColorByPercent(percent) {
@@ -299,32 +347,255 @@ function getColorByPercent(percent) {
     return '#fb7185';
 }
 
-// ==================== CẬP NHẬT DASHBOARD ====================
+function getMetricDataByYear(metric, year) {
+    if (metric === 'congsuat') {
+        return getCongSuatTheoThang(year);
+    } else if (metric === 'ngaytb') {
+        return getNgayDTTrungBinhTheoThang(year);
+    } else if (metric === 'bhyt_rate') {
+        return getTyLeBhytTheoThang(year);
+    } else {
+        return monthlyData[metric]?.[year];
+    }
+}
+
+function getMetricTotalByYear(metric, year) {
+    if (metric === 'congsuat') {
+        return tinhCongSuatTrungBinhNam(year);
+    } else if (metric === 'ngaytb') {
+        return tinhNgayDTTrungBinhNam(year);
+    } else if (metric === 'bhyt_rate') {
+        return tinhTyLeBhytNam(year);
+    } else {
+        return sumIgnoreNull(monthlyData[metric]?.[year]);
+    }
+}
+
+function updateBarChart() {
+    const ctx = document.getElementById('barChart').getContext('2d');
+    if (barChartInstance) barChartInstance.destroy();
+    
+    const yearCurr = currentYear;
+    const yearPrev = compareYear;
+    
+    let dataCurr = getMetricDataByYear(currentMetric, yearCurr);
+    let dataPrev = getMetricDataByYear(currentMetric, yearPrev);
+    
+    // Lọc chỉ lấy số tháng có dữ liệu của năm hiện tại để so sánh cùng kỳ
+    const soThangCurr = dataCurr ? dataCurr.filter(v => v !== null).length : 0;
+    
+    dataCurr = dataCurr ? dataCurr.map(v => v === null ? 0 : v) : Array(12).fill(0);
+    dataPrev = dataPrev ? dataPrev.map(v => v === null ? 0 : v) : Array(12).fill(0);
+    
+    // Tính tổng theo đúng số tháng có dữ liệu của năm hiện tại
+    let totalCurr = 0, totalPrev = 0;
+    let countValidMonths = 0;
+    for (let i = 0; i < 12 && countValidMonths < soThangCurr; i++) {
+        if (dataCurr[i] !== 0) {
+            totalCurr += dataCurr[i];
+            totalPrev += dataPrev[i];
+            countValidMonths++;
+        }
+    }
+    
+    const percentChange = totalPrev > 0 ? ((totalCurr - totalPrev) / totalPrev * 100).toFixed(1) : 0;
+    const changeIcon = totalCurr > totalPrev ? '↑' : (totalCurr < totalPrev ? '↓' : '→');
+    const changeColor = totalCurr > totalPrev ? '#2dd4bf' : (totalCurr < totalPrev ? '#fb7185' : '#facc15');
+    
+    const names = { kham: 'Khám bệnh', noitru: 'Nội trú', ngaydt: 'Ngày điều trị', ngaytb: 'Ngày ĐT TB', congsuat: 'Công suất', bhyt_rate: 'Tỷ lệ BHYT', noitru_banngay: 'Điều trị ban ngày' };
+    
+    document.getElementById('barCompareYear').innerText = yearPrev;
+    document.getElementById('barCurrentYear').innerText = yearCurr;
+    
+    const kyText = soThangCurr < 12 ? `(cùng kỳ ${soThangCurr} tháng)` : '';
+    document.getElementById('barChartTitle').innerHTML = `${names[currentMetric]} ${kyText} <span style="font-size:0.6rem; color:${changeColor};"> ${changeIcon} ${Math.abs(percentChange)}%</span>`;
+    
+    barChartInstance = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: monthsShort,
+            datasets: [
+                {
+                    label: `${yearCurr} (${soThangCurr} tháng)`,
+                    data: dataCurr,
+                    backgroundColor: '#2dd4bf',
+                    borderRadius: 4,
+                    barPercentage: 0.7,
+                    categoryPercentage: 0.85
+                },
+                {
+                    label: `${yearPrev} (cùng kỳ ${soThangCurr} tháng)`,
+                    data: dataPrev.map((v, i) => i < soThangCurr ? v : 0),
+                    backgroundColor: '#facc15',
+                    borderRadius: 4,
+                    barPercentage: 0.7,
+                    categoryPercentage: 0.85
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: {
+                legend: { 
+                    position: 'top', 
+                    labels: { font: { size: 9 }, color: '#aaccc0', usePointStyle: true, boxWidth: 8, padding: 6 }
+                },
+                tooltip: {
+                    backgroundColor: '#0a121a',
+                    titleColor: '#e0e0e0',
+                    bodyColor: '#aaccc0',
+                    callbacks: {
+                        label: function(context) {
+                            let label = context.dataset.label || '';
+                            let value = context.raw;
+                            if (value === 0 && context.dataIndex >= soThangCurr) return label + ': —';
+                            if (currentMetric === 'congsuat') return label + ': ' + value.toFixed(1) + '%';
+                            if (currentMetric === 'ngaytb') return label + ': ' + value.toFixed(1);
+                            if (currentMetric === 'bhyt_rate') return label + ': ' + value.toFixed(1) + '%';
+                            return label + ': ' + value.toLocaleString('vi-VN');
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: { 
+                    grid: { color: '#2a3a4a' }, 
+                    ticks: { font: { size: 8 }, color: '#aaccc0' }
+                },
+                x: { 
+                    ticks: { font: { size: 8 }, color: '#aaccc0', rotation: -45, maxRotation: -45, autoSkip: true }
+                }
+            },
+            layout: {
+                padding: { top: 5, bottom: 5 }
+            }
+        }
+    });
+}
+
+function updateBedTable() {
+    const year = currentYear;
+    const noitruData = bedData.noitru[year];
+    const banngayData = bedData.banngay[year];
+    
+    document.getElementById('bedYear').innerText = year;
+    
+    const khoas = Object.keys(noitruData.khoa);
+    
+    const noitruTable = document.getElementById('noitruBedTable');
+    noitruTable.innerHTML = khoas.map(khoa => `
+        <tr>
+            <td>Khoa ${khoa}</td>
+            <td>${noitruData.khoa[khoa]}</td>
+        </tr>
+    `).join('');
+    document.getElementById('noitruTotalBed').innerHTML = `Tổng: ${noitruData.tong} giường`;
+    
+    const banngayTable = document.getElementById('banngayBedTable');
+    banngayTable.innerHTML = khoas.map(khoa => `
+        <tr>
+            <td>Khoa ${khoa}</td>
+            <td>${banngayData.khoa[khoa]}</td>
+        </tr>
+    `).join('');
+    document.getElementById('banngayTotalBed').innerHTML = `Tổng: ${banngayData.tong} giường`;
+    
+    const tongTable = document.getElementById('tongBedTable');
+    let tongTatCa = 0;
+    tongTable.innerHTML = khoas.map(khoa => {
+        const tongKhoa = noitruData.khoa[khoa] + banngayData.khoa[khoa];
+        tongTatCa += tongKhoa;
+        return `<tr>
+            <td>Khoa ${khoa}</td>
+            <td>${tongKhoa}</td>
+        </tr>`;
+    }).join('');
+    document.getElementById('tongTotalBed').innerHTML = `Tổng: ${tongTatCa} giường`;
+}
+
+function updatePieChart() {
+    const year = currentYear;
+    const tongBhyt = sumIgnoreNull(monthlyData.bhyt_count[year]);
+    const tongKham = sumIgnoreNull(monthlyData.kham[year]);
+    const tongVienPhi = tongKham - tongBhyt;
+    
+    const tyLeBhyt = tongKham > 0 ? (tongBhyt / tongKham) * 100 : 0;
+    const tyLeVp = Math.max(0, 100 - tyLeBhyt);
+    
+    // Cập nhật tiêu đề với năm
+    document.getElementById('pieYear').innerText = year;
+    
+    // Cập nhật legend với cả số lượng và phần trăm
+    document.getElementById('pieBhyt').innerHTML = `${tongBhyt.toLocaleString('vi-VN')} thẻ <span style="font-size:0.6rem; opacity:0.7;">(${tyLeBhyt.toFixed(1)}%)</span>`;
+    document.getElementById('pieVp').innerHTML = `${tongVienPhi.toLocaleString('vi-VN')} lượt <span style="font-size:0.6rem; opacity:0.7;">(${tyLeVp.toFixed(1)}%)</span>`;
+    
+    const ctx = document.getElementById('pieChart').getContext('2d');
+    if (pieChartInstance) pieChartInstance.destroy();
+    
+    pieChartInstance = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['BHYT', 'Viện phí'],
+            datasets: [{
+                data: [tyLeBhyt, tyLeVp],
+                backgroundColor: ['#2dd4bf', '#facc15'],
+                borderWidth: 0,
+                hoverOffset: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            cutout: '55%',
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            const label = context.label || '';
+                            const value = context.raw;
+                            let absoluteValue = label === 'BHYT' ? tongBhyt : tongVienPhi;
+                            return `${label}: ${absoluteValue.toLocaleString('vi-VN')} (${value.toFixed(1)}%)`;
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
 function updateDashboard() {
     const year = currentYear;
     const prevYear = compareYear;
     
-    // ===== TÍNH TOÁN NĂM HIỆN TẠI =====
+    updateBedTable();
+    
     const tongKham = sumIgnoreNull(monthlyData.kham[year]);
     const tongNoitru = sumIgnoreNull(monthlyData.noitru[year]);
     const tongNgaydt = sumIgnoreNull(monthlyData.ngaydt[year]);
     const tbNgaydt = tinhNgayDTTrungBinhNam(year);
     const tbCongsuat = tinhCongSuatTrungBinhNam(year);
+    const tongBhyt = sumIgnoreNull(monthlyData.bhyt_count[year]);
+    const tbBhytRate = tinhTyLeBhytNam(year);
+    const tongVaoVien = tongKham - sumIgnoreNull(monthlyData.ngoaitru[year]);
     
-    // ===== TÍNH TOÁN NĂM SO SÁNH (CÙNG KỲ NẾU CẦN) =====
     const tongKhamPrev = tinhTongSoSanh(year, prevYear, 'kham');
     const tongNoitruPrev = tinhTongSoSanh(year, prevYear, 'noitru');
     const tongNgaydtPrev = tinhTongSoSanh(year, prevYear, 'ngaydt');
     const tbNgaydtPrev = tinhTrungBinhSoSanh(year, prevYear, 'ngaytb');
     const tbCongsuatPrev = tinhTrungBinhSoSanh(year, prevYear, 'congsuat');
+    const tongBhytPrev = tinhTongSoSanh(year, prevYear, 'bhyt_count');
+    const tbBhytRatePrev = tinhTrungBinhSoSanh(year, prevYear, 'bhyt_rate');
+    const tongVaoVienPrev = tinhTongSoSanh(year, prevYear, 'kham') - tinhTongSoSanh(year, prevYear, 'ngoaitru');
     
-    // ===== KẾ HOẠCH VÀ % HOÀN THÀNH =====
     const kh = {
         kham: keHoachNam.kham[year],
         noitru: keHoachNam.noitru[year],
         ngaydt: keHoachNam.ngaydt[year],
         ngaytb: keHoachNam.ngaytb[year],
-        congsuat: keHoachNam.congsuat[year]
+        congsuat: keHoachNam.congsuat[year],
+        bhyt_rate: keHoachNam.bhyt_rate[year]
     };
     
     const ht = {
@@ -332,137 +603,109 @@ function updateDashboard() {
         noitru: tinhPhanTramHT(tongNoitru, kh.noitru),
         ngaydt: tinhPhanTramHT(tongNgaydt, kh.ngaydt),
         ngaytb: tinhPhanTramHT(tbNgaydt, kh.ngaytb),
-        congsuat: tinhPhanTramHT(tbCongsuat, kh.congsuat)
+        congsuat: tinhPhanTramHT(tbCongsuat, kh.congsuat),
+        bhyt_rate: tinhPhanTramHT(tbBhytRate, kh.bhyt_rate)
     };
     
-    // ==================== KPI CARDS ====================
+    // ========== QUAN TRỌNG: ĐÃ SỬA LỖI LẶP % ==========
+    // Đối với công suất và tỷ lệ BHYT, unit để trống vì formatValue đã trả về %
     const kpis = [
-        { title: 'Tổng số lượt khám bệnh', curr: tongKham, prev: tongKhamPrev, kh: kh.kham, ht: ht.kham, unit: 'lượt', type: 'kham' },
-        { title: 'Tổng số lượt nội trú', curr: tongNoitru, prev: tongNoitruPrev, kh: kh.noitru, ht: ht.noitru, unit: 'lượt', type: 'noitru' },
-        { title: 'Tổng số ngày điều trị', curr: tongNgaydt, prev: tongNgaydtPrev, kh: kh.ngaydt, ht: ht.ngaydt, unit: 'ngày', type: 'ngaydt' },
-        { title: 'Ngày điều trị trung bình', curr: tbNgaydt, prev: tbNgaydtPrev, kh: kh.ngaytb, ht: ht.ngaytb, unit: 'ngày', type: 'ngaytb' },
-        { title: 'Công suất giường bệnh KH', curr: tbCongsuat, prev: tbCongsuatPrev, kh: kh.congsuat, ht: ht.congsuat, unit: '%', type: 'congsuat' }
+        { title: 'Tổng lượt khám bệnh', curr: tongKham, prev: tongKhamPrev, kh: kh.kham, ht: ht.kham, unit: 'lượt', type: 'kham' },
+        { title: 'Tổng lượt nội trú', curr: tongNoitru, prev: tongNoitruPrev, kh: kh.noitru, ht: ht.noitru, unit: 'lượt', type: 'noitru' },
+        { title: 'Tổng ngày điều trị', curr: tongNgaydt, prev: tongNgaydtPrev, kh: kh.ngaydt, ht: ht.ngaydt, unit: 'ngày', type: 'ngaydt' },
+        { title: 'Ngày ĐT trung bình', curr: tbNgaydt, prev: tbNgaydtPrev, kh: kh.ngaytb, ht: ht.ngaytb, unit: 'ngày', type: 'ngaytb' },
+        { title: 'Công suất giường', curr: tbCongsuat, prev: tbCongsuatPrev, kh: kh.congsuat, ht: ht.congsuat, unit: '', type: 'congsuat' }, // Đã bỏ % ở đây
+        { title: 'Số thẻ BHYT', curr: tongBhyt, prev: tongBhytPrev, kh: null, ht: null, unit: 'thẻ', type: 'bhyt_count' },
+        { title: 'Vào viện', curr: tongVaoVien, prev: tongVaoVienPrev, kh: null, ht: null, unit: 'lượt', type: 'kham' }
     ];
     
     const kpiGrid = document.getElementById('kpiGrid');
     kpiGrid.innerHTML = kpis.map(k => {
-        const change = getChangeInfo(k.curr, k.prev);
+        const change = k.prev !== null ? getChangeInfo(k.curr, k.prev) : { percent: 0, icon: '→', colorClass: '' };
         const formatted = formatValue(k.curr, k.type);
-        const khFormatted = formatValue(k.kh, k.type, true);
-        const htColor = getColorByPercent(k.ht);
+        // Chỉ hiển thị unit nếu unit không phải chuỗi rỗng (tránh lặp %)
+        const displayUnit = k.unit ? `<span style="font-size:0.55rem;"> ${k.unit}</span>` : '';
+        const khFormatted = k.kh !== null ? formatValue(k.kh, k.type, true) : '—';
+        const htColor = k.ht !== null ? getColorByPercent(k.ht) : '#7a9aa8';
+        const soThangHienTai = getSoThangCoDuLieu(year, k.type === 'bhyt_count' ? 'bhyt_count' : 'kham');
+        const kyText = (soThangHienTai < 12 && soThangHienTai > 0 && k.prev !== null) ? ` (cùng kỳ ${soThangHienTai} tháng)` : '';
+        const bhytRateLine = (k.type === 'bhyt_count' && tbBhytRate > 0) ? `<div>Tỷ lệ BHYT: <span style="color:#f97316; font-weight:bold;">${tbBhytRate.toFixed(1)}%</span></div>` : '';
         
-        // Thêm text "cùng kỳ" nếu năm hiện tại chưa đủ dữ liệu
-        const soThangHienTai = getSoThangCoDuLieu(year, k.type);
-        const kyText = (soThangHienTai < 12 && soThangHienTai > 0) ? ` (cùng kỳ ${soThangHienTai} tháng)` : '';
+        // Xử lý riêng cho phần hiển thị KH để tránh lặp % (nếu là congsuat hoặc bhyt_rate)
+        let khDisplay = '';
+        if (k.kh !== null) {
+            let khValueFormatted = formatValue(k.kh, k.type);
+            let khUnit = k.unit;
+            // Nếu là congsuat hoặc bhyt_rate, formatValue đã có % nên không cần thêm unit
+            if (k.type === 'congsuat' || k.type === 'bhyt_rate') {
+                khUnit = '';
+            }
+            khDisplay = `<div>KH ${year}: ${khValueFormatted} ${khUnit}</div>`;
+        }
         
         return `
             <div class="kpi-card">
                 <div class="kpi-title">${k.title}</div>
-                <div class="kpi-value">${formatted}<span style="font-size:0.6rem;"> ${k.unit}</span></div>
+                <div class="kpi-value">${formatted}${displayUnit}</div>
                 <div class="kpi-compare">
-                    <div>KH ${year}: ${khFormatted} ${k.unit}</div>
-                    <div>So với KH: <span style="color:${htColor}; font-weight:bold;">${k.ht.toFixed(1)}%</span></div>
-                    <div>${prevYear}${kyText}: ${formatValue(k.prev, k.type)}
-                    <span class="${change.colorClass}"> ${change.icon} ${change.percent}%</span></div>
+                    ${khDisplay}
+                    ${k.ht !== null ? `<div>So với KH: <span style="color:${htColor}; font-weight:bold;">${k.ht.toFixed(1)}%</span></div>` : ''}
+                    ${bhytRateLine}
+                    ${k.prev !== null ? `<div>${prevYear}${kyText}: ${formatValue(k.prev, k.type)} <span class="${change.colorClass}"> ${change.icon} ${Math.abs(change.percent)}%</span></div>` : '<div style="color:#5a7a7a;">Chỉ tiêu theo dõi</div>'}
                 </div>
             </div>
         `;
     }).join('');
     
-    // ==================== BẢNG DỮ LIỆU ====================
     const tableHeader = document.getElementById('tableHeader');
     const tableBody = document.getElementById('tableBody');
     
     tableHeader.innerHTML = `<tr><th>Chỉ tiêu</th>${monthsShort.map(m => `<th>${m}</th>`).join('')}<th>Tổng/TB</th><th>KH năm</th><th>% HT</th></tr>`;
     
-    let bedInfo = document.getElementById('bedInfo');
-    if (!bedInfo) {
-        bedInfo = document.createElement('div');
-        bedInfo.id = 'bedInfo';
-        bedInfo.style.cssText = 'text-align: right; font-size: 0.65rem; margin-bottom: 8px; padding: 4px 12px; background: #0a1a1a; border-radius: 20px; display: inline-block; float: right; color: #a0e0c0;';
-        const tableSection = document.querySelector('.table-section');
-        if (tableSection) tableSection.insertBefore(bedInfo, tableSection.firstChild);
-    }
-    bedInfo.innerHTML = `<i class="fas fa-bed"></i> Số giường KH: ${soGiuongKH[year]} giường | KH công suất: ${kh.congsuat}% | KH ngày ĐT TB: ${kh.ngaytb} ngày`;
-    
     const metrics = [
-        { 
-            key: 'kham', 
-            name: 'Tổng số khám bệnh (lượt)', 
-            isPercent: false, 
-            getData: () => monthlyData.kham[year],
-            getTotal: () => sumIgnoreNull(monthlyData.kham[year]),
-            getKh: () => keHoachNam.kham[year]
-        },
-        { 
-            key: 'noitru', 
-            name: 'Tổng số nội trú (lượt)', 
-            isPercent: false, 
-            getData: () => monthlyData.noitru[year],
-            getTotal: () => sumIgnoreNull(monthlyData.noitru[year]),
-            getKh: () => keHoachNam.noitru[year]
-        },
-        { 
-            key: 'ngaydt', 
-            name: 'Tổng số ngày điều trị (ngày)', 
-            isPercent: false, 
-            getData: () => monthlyData.ngaydt[year],
-            getTotal: () => sumIgnoreNull(monthlyData.ngaydt[year]),
-            getKh: () => keHoachNam.ngaydt[year]
-        },
-        { 
-            key: 'ngaytb', 
-            name: 'Ngày điều trị trung bình (ngày)', 
-            isPercent: false, 
-            isAvg: true,
-            getData: () => getNgayDTTrungBinhTheoThang(year),
-            getTotal: () => tinhNgayDTTrungBinhNam(year),
-            getKh: () => keHoachNam.ngaytb[year]
-        },
-        { 
-            key: 'congsuat', 
-            name: 'Công suất sử dụng giường KH (%)', 
-            isPercent: true, 
-            isAvg: true,
-            getData: () => getCongSuatTheoThang(year),
-            getTotal: () => tinhCongSuatTrungBinhNam(year),
-            getKh: () => keHoachNam.congsuat[year]
-        }
+        { key: 'kham', name: 'Tổng số khám bệnh (lượt)', isPercent: false, getData: () => monthlyData.kham[year], getTotal: () => sumIgnoreNull(monthlyData.kham[year]), getKh: () => keHoachNam.kham[year], rowType: 'white' },
+        { key: 'noitru', name: 'Tổng số nội trú (lượt)', isPercent: false, getData: () => monthlyData.noitru[year], getTotal: () => sumIgnoreNull(monthlyData.noitru[year]), getKh: () => keHoachNam.noitru[year], rowType: 'white' },
+        { key: 'ngaydt', name: 'Tổng số ngày điều trị (ngày)', isPercent: false, getData: () => monthlyData.ngaydt[year], getTotal: () => sumIgnoreNull(monthlyData.ngaydt[year]), getKh: () => keHoachNam.ngaydt[year], rowType: 'white' },
+        { key: 'ngaytb', name: 'Ngày điều trị trung bình (ngày)', isPercent: false, isAvg: true, getData: () => getNgayDTTrungBinhTheoThang(year), getTotal: () => tinhNgayDTTrungBinhNam(year), getKh: () => keHoachNam.ngaytb[year], rowType: 'white' },
+        { key: 'congsuat', name: 'Công suất sử dụng giường KH (%)', isPercent: true, isAvg: true, getData: () => getCongSuatTheoThang(year), getTotal: () => tinhCongSuatTrungBinhNam(year), getKh: () => keHoachNam.congsuat[year], rowType: 'white' },
+        { key: 'bhyt_count', name: 'Số thẻ BHYT (thẻ)', isPercent: false, getData: () => monthlyData.bhyt_count[year], getTotal: () => sumIgnoreNull(monthlyData.bhyt_count[year]), getKh: () => null, rowType: 'yellow' },
+        { key: 'bhyt_rate', name: 'Tỷ lệ BHYT (%)', isPercent: true, isAvg: true, getData: () => getTyLeBhytTheoThang(year), getTotal: () => tinhTyLeBhytNam(year), getKh: () => keHoachNam.bhyt_rate[year], rowType: 'yellow' },
+        { key: 'ngoaitru', name: 'KCB ngoại trú (lượt)', isPercent: false, getData: () => monthlyData.ngoaitru[year], getTotal: () => sumIgnoreNull(monthlyData.ngoaitru[year]), getKh: () => null, rowType: 'yellow' },
+        { key: 'noitru_banngay', name: 'Điều trị ban ngày - <24h (lượt)', isPercent: false, getData: () => monthlyData.noitru_banngay[year], getTotal: () => sumIgnoreNull(monthlyData.noitru_banngay[year]), getKh: () => null, rowType: 'yellow' },
+        { key: 'noitru_24h', name: 'Điều trị nội trú - 24/24h (lượt)', isPercent: false, getData: () => monthlyData.noitru_24h[year], getTotal: () => sumIgnoreNull(monthlyData.noitru_24h[year]), getKh: () => null, rowType: 'yellow' },
+        { key: 'chuyenvien', name: 'Chuyển viện (lượt)', isPercent: false, getData: () => monthlyData.chuyenvien[year], getTotal: () => sumIgnoreNull(monthlyData.chuyenvien[year]), getKh: () => null, rowType: 'yellow' }
     ];
     
     let rows = '';
-    
     metrics.forEach(metric => {
         const data = metric.getData();
         const total = metric.getTotal();
         const validCount = countValid(data);
         const khValue = metric.getKh();
-        const phanTram = tinhPhanTramHT(total, khValue);
-        const htColor = getColorByPercent(phanTram);
-        
+        const phanTram = khValue ? tinhPhanTramHT(total, khValue) : null;
+        const htColor = phanTram !== null ? getColorByPercent(phanTram) : '#7a9aa8';
         let displayValue;
-        if (metric.isAvg === true) {
-            displayValue = total.toFixed(1) + (metric.isPercent ? '%' : '');
-        } else {
-            displayValue = total.toLocaleString('vi-VN') + (metric.isPercent ? '%' : '');
-        }
+        if (metric.isAvg === true) displayValue = total.toFixed(1) + (metric.isPercent ? '%' : '');
+        else displayValue = total.toLocaleString('vi-VN') + (metric.isPercent ? '%' : '');
         
-        rows += `<tr>
-            <td style="text-align:left; font-weight:600;">${metric.name}</td>
+        const textColor = metric.rowType === 'yellow' ? '#facc15' : '#eef5ff';
+        const bgColor = metric.rowType === 'yellow' ? 'rgba(250, 204, 21, 0.08)' : 'transparent';
+        
+        rows += `<tr style="background:${bgColor};">
+            <td style="text-align:left; font-weight:600; color:${textColor};">${metric.name}</td>
             ${data.map(v => {
                 if (v === null) return `<td style="color:#5a7a7a;">—</td>`;
-                if (metric.isPercent) return `<td>${v.toFixed(1)}%</td>`;
-                if (metric.key === 'ngaytb') return `<td>${v.toFixed(1)}</td>`;
-                return `<td>${v.toLocaleString('vi-VN')}</td>`;
+                if (metric.isPercent) return `<td style="color:${textColor};">${v.toFixed(1)}%</td>`;
+                if (metric.key === 'ngaytb') return `<td style="color:${textColor};">${v.toFixed(1)}</td>`;
+                return `<td style="color:${textColor};">${v.toLocaleString('vi-VN')}</td>`;
             }).join('')}
-            <td class="year-col">${displayValue}${(metric.isAvg === true) && validCount < 12 ? ` <span style="font-size:0.6rem;">(/${validCount} th)</span>` : ''}</td>
-            <td class="year-col">${(metric.isAvg === true) ? khValue.toFixed(1) + (metric.isPercent ? '%' : '') : khValue.toLocaleString('vi-VN') + (metric.isPercent ? '%' : '')}</td>
-            <td class="year-col" style="color:${htColor};">${phanTram.toFixed(1)}%</td>
+            <td class="year-col" style="color:${textColor};">${displayValue}${(metric.isAvg === true) && validCount < 12 ? ` <span style="font-size:0.6rem;">(/${validCount} th)</span>` : ''}</td>
+            <td class="year-col" style="color:${textColor};">${khValue ? ((metric.isAvg === true) ? khValue.toFixed(1) + (metric.isPercent ? '%' : '') : khValue.toLocaleString('vi-VN') + (metric.isPercent ? '%' : '')) : '—'}</td>
+            <td class="year-col" style="color:${htColor};">${phanTram !== null ? phanTram.toFixed(1) + '%' : '—'}</td>
         </tr>`;
     });
     
-    // Dòng so sánh năm trước (theo tab đang chọn) - CŨNG CÙNG KỲ
-    const compareNames = { kham: 'Khám bệnh', noitru: 'Nội trú', ngaydt: 'Ngày điều trị', ngaytb: 'Ngày ĐT TB', congsuat: 'Công suất' };
+    const compareNames = { kham: 'Khám bệnh', noitru: 'Nội trú', ngaydt: 'Ngày điều trị', ngaytb: 'Ngày ĐT TB', congsuat: 'Công suất', bhyt_rate: 'Tỷ lệ BHYT', noitru_banngay: 'Điều trị ban ngày' };
     let compareData, compareTotal;
     
     if (currentMetric === 'congsuat') {
@@ -471,35 +714,43 @@ function updateDashboard() {
     } else if (currentMetric === 'ngaytb') {
         compareData = getNgayDTTrungBinhTheoThang(prevYear);
         compareTotal = tinhTrungBinhSoSanh(year, prevYear, 'ngaytb');
+    } else if (currentMetric === 'bhyt_rate') {
+        compareData = getTyLeBhytTheoThang(prevYear);
+        compareTotal = tinhTrungBinhSoSanh(year, prevYear, 'bhyt_rate');
+    } else if (currentMetric === 'noitru_banngay') {
+        compareData = monthlyData.noitru_banngay[prevYear];
+        compareTotal = tinhTongSoSanh(year, prevYear, 'noitru_banngay');
     } else {
-        compareData = monthlyData[currentMetric][prevYear];
+        compareData = monthlyData[currentMetric]?.[prevYear];
         compareTotal = tinhTongSoSanh(year, prevYear, currentMetric);
     }
     
     const compareDisplay = formatValue(compareTotal, currentMetric);
-    const soThangHienTai = getSoThangCoDuLieu(year, currentMetric);
+    const soThangHienTai = getSoThangCoDuLieu(year, currentMetric === 'bhyt_rate' ? 'bhyt_count' : currentMetric);
     const kyTextTable = (soThangHienTai < 12 && soThangHienTai > 0) ? ` (cùng kỳ ${soThangHienTai} tháng)` : '';
     
     rows += `<tr style="background:#0a1a1a; border-top:2px solid #2a6a6a;">
-        <td style="text-align:left; font-weight:700; color:#50e0c0;">${prevYear}${kyTextTable} (So sánh ${compareNames[currentMetric]})</td>
+        <td style="text-align:left; font-weight:700; color:#50e0c0;">${prevYear}${kyTextTable} (So sánh ${compareNames[currentMetric] || currentMetric})</td>
         ${monthsShort.map((_, idx) => {
             let val = compareData ? compareData[idx] : null;
             if (val === null) return `<td style="color:#5a7a7a;">—</td>`;
             if (currentMetric === 'congsuat') val = val.toFixed(1) + '%';
             else if (currentMetric === 'ngaytb') val = val.toFixed(1);
+            else if (currentMetric === 'bhyt_rate') val = val.toFixed(1) + '%';
             else val = val.toLocaleString('vi-VN');
-            return `<td>${val}</td>`;
+            return `<td style="color:#50e0c0;">${val}</td>`;
         }).join('')}
-        <td class="year-col">${compareDisplay}</td>
+        <td class="year-col" style="color:#50e0c0;">${compareDisplay}</td>
         <td class="year-col">—</td>
         <td class="year-col">—</td>
-    </table>`;
+    </tr>`;
     
     tableBody.innerHTML = rows;
     updateChart();
+    updateBarChart();
+    updatePieChart();
 }
 
-// ==================== CẬP NHẬT BIỂU ĐỒ ====================
 function updateChart() {
     const ctx = document.getElementById('trendChart').getContext('2d');
     if (chartInstance) chartInstance.destroy();
@@ -512,53 +763,38 @@ function updateChart() {
     } else if (currentMetric === 'ngaytb') {
         dataCurr = getNgayDTTrungBinhTheoThang(currentYear);
         dataPrev = getNgayDTTrungBinhTheoThang(compareYear);
+    } else if (currentMetric === 'bhyt_rate') {
+        dataCurr = getTyLeBhytTheoThang(currentYear);
+        dataPrev = getTyLeBhytTheoThang(compareYear);
+    } else if (currentMetric === 'noitru_banngay') {
+        dataCurr = monthlyData.noitru_banngay?.[currentYear];
+        dataPrev = monthlyData.noitru_banngay?.[compareYear];
     } else {
-        dataCurr = monthlyData[currentMetric][currentYear];
-        dataPrev = monthlyData[currentMetric][compareYear];
+        dataCurr = monthlyData[currentMetric]?.[currentYear];
+        dataPrev = monthlyData[currentMetric]?.[compareYear];
     }
     
     dataCurr = dataCurr ? dataCurr.map(v => v === null ? NaN : v) : Array(12).fill(NaN);
     dataPrev = dataPrev ? dataPrev.map(v => v === null ? NaN : v) : Array(12).fill(NaN);
     
-    const colors = { kham: '#2dd4bf', noitru: '#facc15', ngaydt: '#a78bfa', ngaytb: '#fb7185', congsuat: '#34d399' };
-    const names = { kham: 'Khám bệnh', noitru: 'Nội trú', ngaydt: 'Ngày điều trị', ngaytb: 'Ngày ĐT TB', congsuat: 'Công suất' };
+    const colors = { kham: '#2dd4bf', noitru: '#facc15', ngaydt: '#a78bfa', ngaytb: '#fb7185', congsuat: '#34d399', bhyt_rate: '#f97316', noitru_banngay: '#06b6d4' };
+    const names = { kham: 'Khám bệnh', noitru: 'Nội trú', ngaydt: 'Ngày điều trị', ngaytb: 'Ngày ĐT TB', congsuat: 'Công suất', bhyt_rate: 'Tỷ lệ BHYT', noitru_banngay: 'Điều trị ban ngày' };
     
     const datasets = [
-        {
-            label: `${currentYear} - ${names[currentMetric]}`,
-            data: dataCurr,
-            borderColor: colors[currentMetric] || '#2dd4bf',
-            borderWidth: 2.5,
-            tension: 0.2,
-            pointRadius: 3,
-            pointBackgroundColor: colors[currentMetric],
-            spanGaps: false
-        },
-        {
-            label: `${compareYear} - ${names[currentMetric]}`,
-            data: dataPrev,
-            borderColor: '#facc15',
-            borderWidth: 2,
-            tension: 0.2,
-            pointRadius: 3,
-            borderDash: [5, 5],
-            spanGaps: false
-        }
+        { label: `${currentYear} - ${names[currentMetric]}`, data: dataCurr, borderColor: colors[currentMetric] || '#2dd4bf', borderWidth: 2.5, tension: 0.2, pointRadius: 3, pointBackgroundColor: colors[currentMetric], spanGaps: false },
+        { label: `${compareYear} - ${names[currentMetric]}`, data: dataPrev, borderColor: '#facc15', borderWidth: 2, tension: 0.2, pointRadius: 3, borderDash: [5, 5], spanGaps: false }
     ];
     
     if (currentMetric === 'congsuat') {
         const khValue = keHoachNam.congsuat?.[currentYear];
         if (khValue !== undefined && khValue !== null) {
-            datasets.push({
-                label: `KH ${currentYear} (mục tiêu)`,
-                data: monthsFull.map(() => khValue),
-                borderColor: '#fb7185',
-                borderWidth: 2,
-                borderDash: [10, 5],
-                tension: 0,
-                pointRadius: 0,
-                fill: false
-            });
+            datasets.push({ label: `KH ${currentYear} (mục tiêu)`, data: monthsFull.map(() => khValue), borderColor: '#fb7185', borderWidth: 2, borderDash: [10, 5], tension: 0, pointRadius: 0, fill: false });
+        }
+    }
+    if (currentMetric === 'bhyt_rate') {
+        const khValue = keHoachNam.bhyt_rate?.[currentYear];
+        if (khValue !== undefined && khValue !== null) {
+            datasets.push({ label: `KH ${currentYear} (mục tiêu)`, data: monthsFull.map(() => khValue), borderColor: '#fb7185', borderWidth: 2, borderDash: [10, 5], tension: 0, pointRadius: 0, fill: false });
         }
     }
     
@@ -581,6 +817,8 @@ function updateChart() {
                             if (isNaN(value)) return label + ': —';
                             if (currentMetric === 'congsuat') return label + ': ' + value.toFixed(1) + '%';
                             if (currentMetric === 'ngaytb') return label + ': ' + value.toFixed(1);
+                            if (currentMetric === 'bhyt_rate') return label + ': ' + value.toFixed(1) + '%';
+                            if (currentMetric === 'noitru_banngay') return label + ': ' + value.toLocaleString('vi-VN') + ' lượt';
                             return label + ': ' + value.toLocaleString('vi-VN');
                         }
                     }
@@ -594,7 +832,6 @@ function updateChart() {
     });
 }
 
-// ==================== KHỞI TẠO & EVENT LISTENERS ====================
 document.getElementById('yearSelect').addEventListener('change', (e) => {
     currentYear = parseInt(e.target.value);
     compareYear = currentYear - 1;
@@ -609,6 +846,7 @@ document.querySelectorAll('.chart-tab').forEach(tab => {
         tab.classList.add('active');
         currentMetric = tab.dataset.metric;
         updateChart();
+        updateBarChart();
     });
 });
 
