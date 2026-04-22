@@ -527,8 +527,8 @@ function updatePieChart() {
     document.getElementById('pieYear').innerText = year;
     
     // Cập nhật legend với cả số lượng và phần trăm
-    document.getElementById('pieBhyt').innerHTML = `${tongBhyt.toLocaleString('vi-VN')} thẻ <span style="font-size:0.6rem; opacity:0.7;">(${tyLeBhyt.toFixed(1)}%)</span>`;
-    document.getElementById('pieVp').innerHTML = `${tongVienPhi.toLocaleString('vi-VN')} lượt <span style="font-size:0.6rem; opacity:0.7;">(${tyLeVp.toFixed(1)}%)</span>`;
+    document.getElementById('pieBhyt').innerHTML = `${tongBhyt.toLocaleString('vi-VN')} thẻ <span style="font-size:0.7rem; opacity:0.9;">(${tyLeBhyt.toFixed(1)}%)</span>`;
+    document.getElementById('pieVp').innerHTML = `${tongVienPhi.toLocaleString('vi-VN')} lượt <span style="font-size:0.7rem; opacity:0.9;">(${tyLeVp.toFixed(1)}%)</span>`;
     
     const ctx = document.getElementById('pieChart').getContext('2d');
     if (pieChartInstance) pieChartInstance.destroy();
