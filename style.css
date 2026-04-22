@@ -26,7 +26,7 @@ body {
     align-items: center;
     margin-bottom: 12px;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 8px;
 }
 
 .title-section h1 {
@@ -48,9 +48,9 @@ body {
 .filter-bar {
     background: #0e1620;
     border-radius: 30px;
-    padding: 5px 18px;
+    padding: 4px 16px;
     display: flex;
-    gap: 16px;
+    gap: 14px;
     align-items: center;
     flex-wrap: wrap;
     border: 1px solid #2a3a4a;
@@ -65,7 +65,7 @@ body {
     background: #0a0f1a;
     border: 1px solid #2a5a5a;
     color: #eef5ff;
-    padding: 4px 12px;
+    padding: 3px 10px;
     border-radius: 20px;
     font-size: 0.75rem;
     cursor: pointer;
@@ -73,7 +73,7 @@ body {
 
 .compare-badge {
     background: #1a3a3a;
-    padding: 4px 14px;
+    padding: 3px 12px;
     border-radius: 20px;
     font-size: 0.7rem;
     color: #50e0c0;
@@ -132,7 +132,7 @@ body {
 .trend-up { color: #2dd4bf; }
 .trend-down { color: #fb7185; }
 
-/* Chart Row - 2 cột: Line chart 70%, Bar chart 30% - CĂN CHỈNH CHIỀU CAO ĐỒNG ĐỀU */
+/* Chart Row - 2 cột: Line chart 70%, Bar chart 30% - GIẢM PADDING */
 .chart-row {
     display: flex;
     gap: 12px;
@@ -168,7 +168,7 @@ body {
     padding-bottom: 6px;
     border-bottom: 1px solid #2a3a4a;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 6px;
     flex-shrink: 0;
 }
 
@@ -213,7 +213,7 @@ body {
     border-radius: 20px;
 }
 
-/* Cố định chiều cao cho canvas để đồng bộ */
+/* Cố định chiều cao canvas KHÔNG CO GIÃN */
 .chart-line-section canvas {
     max-height: 200px !important;
     width: 100%;
@@ -226,12 +226,12 @@ body {
     flex: 1;
 }
 
-/* Two columns layout - CÙNG TỈ LỆ 70%-30% VỚI CHART-ROW */
+/* Two columns layout - ĐẢM BẢO 2 CỘT BẰNG CHIỀU CAO TỰ NHIÊN */
 .two-columns {
     display: flex;
     gap: 12px;
     margin-bottom: 12px;
-    align-items: stretch;
+    align-items: stretch;  /* QUAN TRỌNG: ÉP 2 cột bằng chiều cao */
 }
 
 .left-column {
@@ -249,13 +249,13 @@ body {
     gap: 12px;
 }
 
-/* Table section left */
+/* Table section left - chiều cao tự động theo nội dung */
 .table-section {
     background: #0e1620;
     border-radius: 12px;
     padding: 10px 10px;
     border: 1px solid #2a3a4a;
-    height: 100%;
+    height: 100%;  /* CHIẾM TOÀN BỘ CHIỀU CAO CỘT */
     display: flex;
     flex-direction: column;
 }
@@ -279,7 +279,7 @@ body {
 
 .table-legend {
     display: flex;
-    gap: 15px;
+    gap: 12px;
     font-size: 0.67rem;
     color: #8aabba;
 }
@@ -287,7 +287,7 @@ body {
 .table-legend span {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 4px;
 }
 
 .data-table {
@@ -298,7 +298,7 @@ body {
 
 .data-table th {
     text-align: center;
-    padding: 6px 4px;
+    padding: 5px 3px;
     background: #0a1a1a;
     color: #aaccc0;
     font-weight: 600;
@@ -307,7 +307,7 @@ body {
 
 .data-table td {
     text-align: center;
-    padding: 5px 4px;
+    padding: 4px 3px;
     border-bottom: 1px solid #1a3a3a;
 }
 
@@ -368,6 +368,9 @@ body {
     border-radius: 12px;
     padding: 10px 10px;
     border: 1px solid #2a3a4a;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .bed-table-section h4 {
@@ -429,7 +432,7 @@ body {
     border-top: 1px solid #2a3a4a;
 }
 
-/* Responsive */
+/* Responsive giữ nguyên tỷ lệ, không co giãn chữ */
 @media (max-width: 1200px) {
     .chart-row {
         flex-direction: column;
@@ -442,7 +445,7 @@ body {
     }
     .bed-three-columns {
         flex-direction: column;
-        gap: 16px;
+        gap: 12px;
     }
 }
 
@@ -452,11 +455,11 @@ body {
 }
 
 @media (max-width: 1000px) {
-    body { padding: 10px 16px; }
+    body { padding: 8px 12px; }
     .kpi-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
     .kpi-value { font-size: 1.1rem; }
     .data-table { font-size: 0.6rem; }
-    .chart-line-section canvas, .chart-bar-section canvas { max-height: 180px; }
+    .chart-line-section canvas, .chart-bar-section canvas { max-height: 160px; }
 }
 
 @media (max-width: 700px) {
