@@ -62,27 +62,27 @@ const monthlyData = {
         2023: [2, 2, 6, 5, 3, 5, 4, 3, 2, 2, 2, 2],
         2024: [1, 1, 2, 2, 1, 2, 2, 2, 3, 4, 5, 4],
         2025: [3, 2, 5, 6, 4, 5, 7, 8, 4, 6, 4, 6],
-        2026: [2, 2, 4, null, null, null, null, null, null, null, null, null]
+        2026: [0, 0, 1, null, null, null, null, null, null, null, null, null]
     }
 };
 
 // ==================== DỮ LIỆU GIƯỜNG BỆNH THEO KHOA ====================
 const bedData = {
     noitru: {
-        2021: { tong: 190, khoa: { Noi: 47, Ngoai: 29, Lao: 47, ChamCuu: 29, PHCN: 38 } },
-        2022: { tong: 190, khoa: { Noi: 47, Ngoai: 29, Lao: 47, ChamCuu: 29, PHCN: 38 } },
-        2023: { tong: 190, khoa: { Noi: 47, Ngoai: 29, Lao: 47, ChamCuu: 29, PHCN: 38 } },
-        2024: { tong: 170, khoa: { Noi: 42, Ngoai: 26, Lao: 42, ChamCuu: 26, PHCN: 34 } },
-        2025: { tong: 150, khoa: { Noi: 37, Ngoai: 23, Lao: 37, ChamCuu: 23, PHCN: 30 } },
-        2026: { tong: 123, khoa: { Noi: 32, Ngoai: 17, Lao: 32, ChamCuu: 19, PHCN: 23 } }
+        2021: { tong: 190, khoa: { Nội: 47, Ngoại: 29, Lão: 47, Châmcứu: 29, PHCN: 38 } },
+        2022: { tong: 190, khoa: { Nội: 47, Ngoại: 29, Lão: 47, Châmcứu: 29, PHCN: 38 } },
+        2023: { tong: 190, khoa: { Nội: 47, Ngoại: 29, Lão: 47, Châmcứu: 29, PHCN: 38 } },
+        2024: { tong: 170, khoa: { Nội: 42, Ngoại: 26, Lão: 42, Châmcứu: 26, PHCN: 34 } },
+        2025: { tong: 150, khoa: { Nội: 37, Ngoại: 23, Lão: 37, Châmcứu: 23, PHCN: 30 } },
+        2026: { tong: 123, khoa: { Nội: 32, Ngoại: 17, Lão: 32, Châmcứu: 19, PHCN: 23 } }
     },
     banngay: {
-        2021: { tong: 27, khoa: { Noi: 5, Ngoai: 6, Lao: 5, ChamCuu: 4, PHCN: 7 } },
-        2022: { tong: 27, khoa: { Noi: 5, Ngoai: 6, Lao: 5, ChamCuu: 4, PHCN: 7 } },
-        2023: { tong: 27, khoa: { Noi: 5, Ngoai: 6, Lao: 5, ChamCuu: 4, PHCN: 7 } },
-        2024: { tong: 27, khoa: { Noi: 5, Ngoai: 6, Lao: 5, ChamCuu: 4, PHCN: 7 } },
-        2025: { tong: 27, khoa: { Noi: 5, Ngoai: 6, Lao: 5, ChamCuu: 4, PHCN: 7 } },
-        2026: { tong: 27, khoa: { Noi: 5, Ngoai: 6, Lao: 5, ChamCuu: 4, PHCN: 7 } }
+        2021: { tong: 27, khoa: { Nội: 5, Ngoại: 6, Lão: 5, Châmcứu: 4, PHCN: 7 } },
+        2022: { tong: 27, khoa: { Nội: 5, Ngoại: 6, Lão: 5, Châmcứu: 4, PHCN: 7 } },
+        2023: { tong: 27, khoa: { Nội: 5, Ngoại: 6, Lão: 5, Châmcứu: 4, PHCN: 7 } },
+        2024: { tong: 27, khoa: { Nội: 5, Ngoại: 6, Lão: 5, Châmcứu: 4, PHCN: 7 } },
+        2025: { tong: 27, khoa: { Nội: 5, Ngoại: 6, Lão: 5, Châmcứu: 4, PHCN: 7 } },
+        2026: { tong: 27, khoa: { Nội: 5, Ngoại: 6, Lão: 5, Châmcứu: 4, PHCN: 7 } }
     }
 };
 
@@ -408,7 +408,7 @@ function updateBarChart() {
     document.getElementById('barCurrentYear').innerText = yearCurr;
     
     const kyText = soThangCurr < 12 ? `(cùng kỳ ${soThangCurr} tháng)` : '';
-    document.getElementById('barChartTitle').innerHTML = `${names[currentMetric]} ${kyText} <span style="font-size:0.6rem; color:${changeColor};"> ${changeIcon} ${Math.abs(percentChange)}%</span>`;
+    document.getElementById('barChartTitle').innerHTML = `${names[currentMetric]} ${kyText} <span style="font-size:0.67rem; color:${changeColor};"> ${changeIcon} ${Math.abs(percentChange)}%</span>`;
     
     barChartInstance = new Chart(ctx, {
         type: 'bar',
@@ -568,6 +568,8 @@ function updatePieChart() {
 function updateDashboard() {
     const year = currentYear;
     const prevYear = compareYear;
+
+    updateReportMonths();
     
     updateBedTable();
     
@@ -613,10 +615,10 @@ function updateDashboard() {
         { title: 'Tổng lượt khám bệnh', curr: tongKham, prev: tongKhamPrev, kh: kh.kham, ht: ht.kham, unit: 'lượt', type: 'kham' },
         { title: 'Tổng lượt nội trú', curr: tongNoitru, prev: tongNoitruPrev, kh: kh.noitru, ht: ht.noitru, unit: 'lượt', type: 'noitru' },
         { title: 'Tổng ngày điều trị', curr: tongNgaydt, prev: tongNgaydtPrev, kh: kh.ngaydt, ht: ht.ngaydt, unit: 'ngày', type: 'ngaydt' },
-        { title: 'Ngày ĐT trung bình', curr: tbNgaydt, prev: tbNgaydtPrev, kh: kh.ngaytb, ht: ht.ngaytb, unit: 'ngày', type: 'ngaytb' },
-        { title: 'Công suất giường', curr: tbCongsuat, prev: tbCongsuatPrev, kh: kh.congsuat, ht: ht.congsuat, unit: '', type: 'congsuat' }, // Đã bỏ % ở đây
-        { title: 'Số thẻ BHYT', curr: tongBhyt, prev: tongBhytPrev, kh: null, ht: null, unit: 'thẻ', type: 'bhyt_count' },
-        { title: 'Vào viện', curr: tongVaoVien, prev: tongVaoVienPrev, kh: null, ht: null, unit: 'lượt', type: 'kham' }
+        { title: 'Ngày điều trị trung bình', curr: tbNgaydt, prev: tbNgaydtPrev, kh: kh.ngaytb, ht: ht.ngaytb, unit: 'ngày', type: 'ngaytb' },
+        { title: 'Công suất giường kế hoạch', curr: tbCongsuat, prev: tbCongsuatPrev, kh: kh.congsuat, ht: ht.congsuat, unit: '', type: 'congsuat' }, // Đã bỏ % ở đây
+        { title: 'Số thẻ KCB BHYT', curr: tongBhyt, prev: tongBhytPrev, kh: null, ht: null, unit: 'thẻ', type: 'bhyt_count' },
+        { title: 'Tổng lượt vào viện', curr: tongVaoVien, prev: tongVaoVienPrev, kh: null, ht: null, unit: 'lượt', type: 'kham' }
     ];
     
     const kpiGrid = document.getElementById('kpiGrid');
@@ -699,7 +701,7 @@ function updateDashboard() {
                 if (metric.key === 'ngaytb') return `<td style="color:${textColor};">${v.toFixed(1)}</td>`;
                 return `<td style="color:${textColor};">${v.toLocaleString('vi-VN')}</td>`;
             }).join('')}
-            <td class="year-col" style="color:${textColor};">${displayValue}${(metric.isAvg === true) && validCount < 12 ? ` <span style="font-size:0.6rem;">(/${validCount} th)</span>` : ''}</td>
+            <td class="year-col" style="color:${textColor};">${displayValue}${(metric.isAvg === true) && validCount < 12 ? ` <span style="font-size:0.67rem;">(/${validCount} th)</span>` : ''}</td>
             <td class="year-col" style="color:${textColor};">${khValue ? ((metric.isAvg === true) ? khValue.toFixed(1) + (metric.isPercent ? '%' : '') : khValue.toLocaleString('vi-VN') + (metric.isPercent ? '%' : '')) : '—'}</td>
             <td class="year-col" style="color:${htColor};">${phanTram !== null ? phanTram.toFixed(1) + '%' : '—'}</td>
         </tr>`;
@@ -830,6 +832,22 @@ function updateChart() {
             }
         }
     });
+}
+
+function updateReportMonths() {
+    const year = currentYear;
+    let soThangCoDuLieu = 0;
+    
+    // Lấy số tháng có dữ liệu từ chỉ tiêu Khám bệnh (chỉ tiêu chính)
+    const khamData = monthlyData.kham[year];
+    if (khamData) {
+        soThangCoDuLieu = khamData.filter(v => v !== null).length;
+    }
+    
+    const reportMonthsSpan = document.getElementById('reportMonths');
+    if (reportMonthsSpan) {
+        reportMonthsSpan.innerText = soThangCoDuLieu;
+    }
 }
 
 document.getElementById('yearSelect').addEventListener('change', (e) => {
