@@ -38,31 +38,31 @@ const monthlyData = {
         2023: [53, 154, 190, 123, 161, 114, 67, 37, 38, 38, 26, 19],
         2024: [14, 22, 31, 21, 30, 29, 28, 33, 76, 92, 104, 99],
         2025: [41, 86, 104, 87, 101, 108, 114, 96, 103, 79, 88, 82],
-        2026: [72, 29, 111, null, null, null, null, null, null, null, null, null]
+        2026: [67, 32, 56, null, null, null, null, null, null, null, null, null]
     },
     dieutri_ngoaitru: {
-        2021: [156, 89, 228, 179, 91, 128, 107, 41, 31, 82, 57, 21],
-        2022: [16, 27, 54, 58, 88, 100, 90, 86, 74, 76, 91, 66],
-        2023: [27, 77, 95, 62, 81, 57, 34, 19, 19, 19, 13, 10],
-        2024: [7, 11, 16, 11, 15, 15, 14, 17, 38, 46, 52, 50],
-        2025: [21, 43, 52, 44, 51, 54, 57, 48, 52, 40, 44, 41],
-        2026: [36, 15, 56, null, null, null, null, null, null, null, null, null]
+        2021: [null, null, null, null, null, null, null, null, null, null, null, null],
+        2022: [null, null, null, null, null, null, null, null, null, null, null, null],
+        2023: [null, null, null, null, null, null, null, null, null, null, null, null],
+        2024: [null, null, null, null, null, null, null, null, null, null, null, null],
+        2025: [null, null, null, null, null, null, null, null, null, null, null, null],
+        2026: [null, null, null, null, null, null, null, null, null, null, null, null]
     },
     noitru_banngay: {
-        2021: [42, 22, 76, 94, 28, 24, 37, 7, 5, 21, 66, 49],
-        2022: [3, 5, 19, 29, 31, 50, 60, 67, 36, 39, 45, 46],
-        2023: [17, 19, 59, 64, 29, 47, 50, 33, 16, 18, 17, 19],
-        2024: [9, 5, 19, 20, 12, 14, 16, 17, 21, 33, 46, 43],
-        2025: [25, 17, 46, 55, 37, 44, 56, 65, 36, 57, 35, 52],
-        2026: [23, 17, 36, null, null, null, null, null, null, null, null, null]
+        2021: [null, null, null, null, null, null, null, null, null, null, null, null],
+        2022: [null, null, null, null, null, null, null, null, null, null, null, null],
+        2023: [null, null, null, null, null, null, null, null, null, null, null, null],
+        2024: [null, null, null, null, null, null, 6, 8, 4, 4, 35, 61],
+        2025: [44, 33, 83, null, null, null, null, null, null, null, null, null],
+        2026: [null, null, null, null, null, null, null, null, null, null, null, null]
     },
     noitru_24h: {
-        2021: [226, 117, 407, 503, 148, 128, 200, 35, 27, 111, 350, 264],
-        2022: [17, 25, 103, 155, 169, 270, 323, 357, 194, 208, 242, 244],
-        2023: [93, 101, 315, 342, 158, 251, 268, 174, 88, 96, 88, 102],
-        2024: [48, 27, 102, 107, 66, 76, 86, 90, 112, 175, 247, 227],
-        2025: [137, 92, 244, 292, 194, 230, 294, 342, 188, 300, 187, 273],
-        2026: [123, 91, 192, null, null, null, null, null, null, null, null, null]
+        2021: [268, 139, 483, 597, 176, 152, 237, 42, 32, 132, 416, 313],
+        2022: [20, 30, 122, 184, 200, 320, 383, 424, 230, 247, 287, 290],
+        2023: [110, 120, 374, 406, 187, 298, 318, 207, 104, 114, 105, 121],
+        2024: [57, 32, 121, 127, 78, 90, 96, 99, 129, 204, 258, 209],
+        2025: [118, 76, 207, null, null, null, null, null, null, null, null, null],
+        2026: [null, null, null, null, null, null, null, null, null, null, null, null]
     },
     chuyenden: {
         2021: [759, 415, 991, 951, 480, 704, 629, 249, 204, 379, 0, 0],
@@ -87,16 +87,16 @@ const bedData = {
         2021: { tong: 190, khoa: { Nội: 47, Ngoại: 29, Lão: 47, Châmcứu: 29, PHCN: 38 } },
         2022: { tong: 190, khoa: { Nội: 47, Ngoại: 29, Lão: 47, Châmcứu: 29, PHCN: 38 } },
         2023: { tong: 190, khoa: { Nội: 47, Ngoại: 29, Lão: 47, Châmcứu: 29, PHCN: 38 } },
-        2024: { tong: 170, khoa: { Nội: 42, Ngoại: 26, Lão: 42, Châmcứu: 26, PHCN: 34 } },
-        2025: { tong: 150, khoa: { Nội: 37, Ngoại: 23, Lão: 37, Châmcứu: 23, PHCN: 30 } },
+        2024: { tong: 138, khoa: { Nội: 37, Ngoại: 20, Lão: 32, Châmcứu: 22, PHCN: 27 } },
+        2025: { tong: 118, khoa: { Nội: 32, Ngoại: 17, Lão: 27, Châmcứu: 19, PHCN: 23 } },
         2026: { tong: 123, khoa: { Nội: 32, Ngoại: 17, Lão: 32, Châmcứu: 19, PHCN: 23 } }
     },
     banngay: {
-        2021: { tong: 27, khoa: { Nội: 5, Ngoại: 6, Lão: 5, Châmcứu: 4, PHCN: 7 } },
-        2022: { tong: 27, khoa: { Nội: 5, Ngoại: 6, Lão: 5, Châmcứu: 4, PHCN: 7 } },
-        2023: { tong: 27, khoa: { Nội: 5, Ngoại: 6, Lão: 5, Châmcứu: 4, PHCN: 7 } },
-        2024: { tong: 27, khoa: { Nội: 5, Ngoại: 6, Lão: 5, Châmcứu: 4, PHCN: 7 } },
-        2025: { tong: 27, khoa: { Nội: 5, Ngoại: 6, Lão: 5, Châmcứu: 4, PHCN: 7 } },
+        2021: { tong: 0, khoa: { Nội: 0, Ngoại: 0, Lão: 0, Châmcứu: 0, PHCN: 0 } },
+        2022: { tong: 0, khoa: { Nội: 0, Ngoại: 0, Lão: 0, Châmcứu: 0, PHCN: 0 } },
+        2023: { tong: 0, khoa: { Nội: 0, Ngoại: 0, Lão: 0, Châmcứu: 0, PHCN: 0 } },
+        2024: { tong: 32, khoa: { Nội: 5, Ngoại: 6, Lão: 10, Châmcứu: 4, PHCN: 7 } },
+        2025: { tong: 32, khoa: { Nội: 5, Ngoại: 6, Lão: 10, Châmcứu: 4, PHCN: 7 } },
         2026: { tong: 27, khoa: { Nội: 5, Ngoại: 6, Lão: 5, Châmcứu: 4, PHCN: 7 } }
     }
 };
