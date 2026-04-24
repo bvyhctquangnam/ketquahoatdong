@@ -53,16 +53,16 @@ const monthlyData = {
         2022: [null, null, null, null, null, null, null, null, null, null, null, null],
         2023: [null, null, null, null, null, null, null, null, null, null, null, null],
         2024: [null, null, null, null, null, null, 6, 8, 4, 4, 35, 61],
-        2025: [44, 33, 83, null, null, null, null, null, null, null, null, null],
-        2026: [null, null, null, null, null, null, null, null, null, null, null, null]
+        2025: [44, 33, 83, 82, 63, 73, 100, 118, 66, 106, 67, 94],
+        2026: [53, 31, 63, null, null, null, null, null, null, null, null, null]
     },
     noitru_24h: {
         2021: [268, 139, 483, 597, 176, 152, 237, 42, 32, 132, 416, 313],
         2022: [20, 30, 122, 184, 200, 320, 383, 424, 230, 247, 287, 290],
         2023: [110, 120, 374, 406, 187, 298, 318, 207, 104, 114, 105, 121],
         2024: [57, 32, 121, 127, 78, 90, 96, 99, 129, 204, 258, 209],
-        2025: [118, 76, 207, null, null, null, null, null, null, null, null, null],
-        2026: [null, null, null, null, null, null, null, null, null, null, null, null]
+        2025: [118, 76, 207, 265, 168, 201, 250, 289, 158, 251, 155, 231],
+        2026: [93, 77, 165, null, null, null, null, null, null, null, null, null]
     },
     chuyenden: {
         2021: [759, 415, 991, 951, 480, 704, 629, 249, 204, 379, 0, 0],
